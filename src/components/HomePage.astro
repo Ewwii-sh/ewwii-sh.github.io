@@ -41,7 +41,7 @@ import '../styles/home_page.css';
 		<a href="#getting-started" class="btn-primary">Get Started</a>
 
 		<div class="install-box group" title="Install">
-			<pre id="install-code" class="install-pre">cargo install https://github.com/Ewwii-sh/ewwii</pre>
+			<pre id="install-code" class="install-pre">cargo install --git https://github.com/Ewwii-sh/ewwii</pre>
 			<button
 			class="copy-btn"
 			onclick="navigator.clipboard.writeText(document.getElementById('install-code').innerText).then(() => { copyFeedback(this) })"
