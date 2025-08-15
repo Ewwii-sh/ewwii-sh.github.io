@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<Layout>
+  <NavBar />
+
+  <main class="max-w-4xl mx-auto p-6 space-y-12">
+    <h1 class="text-5xl font-extrabold text-center mb-6">Getting Started with Ewwii</h1>
+    <p class="text-lg text-center mb-12">
+      Install Ewwii, write your first widget, and see it in action—all in minutes.
+    </p>
+
+    <!-- Step 1: Install -->
+    <section class="static-card">
+      <h2 class="text-2xl font-semibold mb-4">1. Install Ewwii</h2>
+      <p class="mb-4 pb-2">Run the following command in your terminal:</p>
+      <pre class="bg-gray-900 text-white p-4 rounded overflow-x-auto">cargo install --git https://github.com/Ewwii-sh/ewwii</pre>
+      <Button
+        onclick="navigator.clipboard.writeText('cargo install --git https://github.com/Ewwii-sh/ewwii')"
+      >
+        Copy Command
+      </Button>
+    </section>
+
+    <!-- Step 2: Install eiipm -->
+    <section class="static-card">
+      <h2 class="text-2xl font-semibold mb-4">2. Install Eiipm (optional)</h2>
+      <p class="mb-4 pb-2">Run the following command in your terminal:</p>
+      <pre class="bg-gray-900 text-white p-4 rounded overflow-x-auto">cargo install --git https://github.com/Ewwii-sh/eiipm</pre>
+      <Button
+        onclick="navigator.clipboard.writeText('cargo install --git https://github.com/Ewwii-sh/eiipm')"
+      >
+        Copy Command
+      </Button>
+    </section>
+
+    <!-- Step 3: Launch & Explore -->
+    <section class="static-card">
+      <h2 class="text-2xl font-semibold mb-4">3. Launch & Explore</h2>
+      <p class="pb-2">Run ewwii for the first time:</p>
+      <pre class="bg-gray-900 text-white p-4 rounded overflow-x-auto">ewwii</pre>
+      <p class="mt-2 pt-2">Check out the <a href="/docs" class="text-blue-600 underline">documentation</a> for writing your first widget, or browse examples for inspiration.</p>
+    </section>
+
+    <!-- Resources -->
+    <section class="p-6">
+      <h2 class="text-2xl font-semibold mb-4">Next Steps</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><a href="/docs" class="text-blue-600 underline">Full Documentation</a></li>
+        <li><a href="/examples" class="text-blue-600 underline">Example Widgets</a></li>
+        <li><a href="https://github.com/Ewwii-sh/ewwii" class="text-blue-600 underline">GitHub Repository</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>
