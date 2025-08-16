@@ -7,7 +7,7 @@ sidebar:
 
 ## Reading Ewwii Documentation
 
-To get your first widget running, start with the [Ewwii documentation overview](https://ewwii-sh.github.io/docs/configuration/).
+To get your first widget running, start with the [Ewwii documentation overview](https://ewwii-sh.github.io/docs/configuration/configuration).
 
 This simple overview is extracted from the [full ewwii documentation](https://ewwii-sh.github.io/ewwii) and explains how you can use ewwii's configuration language **Rhai**.
 
