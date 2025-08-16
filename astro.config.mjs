@@ -39,5 +39,6 @@ export default defineConfig({
     "/docs": "/docs/introduction",
     "/docs/getting-started": "/docs/getting-started/installation",
     "/docs/reference": "/docs/reference/table_of_contents",
+    "/docs/configuration": "/docs/configuration/configuration",
   },
 });
