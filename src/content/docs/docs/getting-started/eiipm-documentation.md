@@ -15,7 +15,7 @@ Eiipm helps you install and manage binaries, plugins, and themes, so you can ext
 To install a theme:
 
 ```bash
-eiipm install ewwii # install the ewwii binary
+eiipm install awesome_theme
 ```
 
 To update all installed packages:
