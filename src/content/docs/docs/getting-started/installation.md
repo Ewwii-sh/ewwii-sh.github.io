@@ -7,6 +7,8 @@ sidebar:
 
 ## Installation
 
+### Installing ewwii
+
 The first step of using Ewwii is installing it. You would need to have the following prerequesties installed on your system to build/install ewwii.
 
 **Prerequesties:**
@@ -38,14 +40,14 @@ The following list of package names should work for arch linux:
 
 > **Note** that you will most likely need the -devel variants of your distro's packages to be able to compile ewwii.
 
-### Building
+#### Building
 
 Once you have the prerequisites ready, you're ready to install and build ewwii.
 
 First clone the repo:
 
 ```bash
-git clone https://github.com/byson94/ewwii
+git clone https://github.com/Ewwii-sh/ewwii
 ```
 
 ```bash
@@ -65,7 +67,7 @@ When you're on Wayland, build with:
 cargo build --release --no-default-features --features=wayland
 ```
 
-### Running ewwii
+#### Running ewwii
 
 Once you've built it you can now run it by entering:
 
@@ -86,12 +88,40 @@ Then to run it, enter:
 ./ewwii open <window_name>
 ```
 
-### Installing via package managers
+#### Installing via package managers
 
 If you don't want to go through the _very_ tedious task of cloning and building ewwii, you can install it using Cargo (Rust crate manager).
 
 You can run the following command to install ewwii from cargo:
 
 ```bash
-cargo install --git https://github.com/byson94/ewwii
+cargo install --git https://github.com/Ewwii-sh/ewwii
+```
+
+### Installing eiipm
+
+**eiipm** is the official package manager for Ewwii. It's recommended to install it alongside Ewwii to easily manage packages.
+
+You can install **eiipm** using the same methods as Ewwii:
+
+#### 1. From source
+
+```bash
+git clone https://github.com/Ewwii-sh/eiipm
+cd eiipm
+cargo build --release
+```
+
+This will generate the `eiipm` binary in `target/release`.
+
+#### 2. Using Cargo
+
+```bash
+cargo install --git https://github.com/Ewwii-sh/eiipm
+```
+
+After installation, verify it works:
+
+```bash
+eiipm --version
 ```

@@ -29,6 +29,10 @@ export default defineConfig({
           autogenerate: { directory: "docs/configuration" },
         },
         {
+          label: "Package Manager",
+          autogenerate: { directory: "docs/package-manager" },
+        },
+        {
           label: "Reference",
           autogenerate: { directory: "docs/reference" },
         },
@@ -40,5 +44,6 @@ export default defineConfig({
     "/docs/getting-started": "/docs/getting-started/installation",
     "/docs/reference": "/docs/reference/table_of_contents",
     "/docs/configuration": "/docs/configuration/configuration",
+    "/docs/package-manager": "/docs/package-manager/ewwii-package-manager",
   },
 });
