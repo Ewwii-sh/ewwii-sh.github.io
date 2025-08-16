@@ -1,14 +1,21 @@
-# Reading Ewwii Documentation
+---
+title: Ewwii Documentation
+description: Link to ewwii documentation.
+sidebar:
+  order: 1
+---
+
+## Reading Ewwii Documentation
 
 To get your first widget running, start with the [Ewwii documentation](https://ewwii-sh.github.io/ewwii).
 
 It explains how to use Ewwii's configuration language **Rhai**, run commands, and troubleshoot common issues. You’ll also find example widget configurations you can adapt for your own setup.
 
-## Minimal Example
+### Minimal Example
 
 Here’s a simple configuration that creates a window containing a label:
 
-```rust,ignore
+```rust
 fn foo() {
     return box(#{
         class: "widget1",
@@ -32,6 +39,6 @@ enter([
 
 Try changing the label text to see how it updates in your widget.
 
-## Reference
+### Reference
 
 - [Ewwii documentation](https://ewwii-sh.github.io/ewwii)

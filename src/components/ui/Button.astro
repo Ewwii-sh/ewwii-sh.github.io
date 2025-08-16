@@ -1,8 +1,0 @@
----
-const { class: className = "", ...props } = Astro.props;
-import '../../styles/global.css';
----
-
-<button class={`btn-primary brightness-[0.80] ${className}`} {...props}>
-  <slot />
-</button>

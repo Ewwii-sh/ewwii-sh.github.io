@@ -1,4 +1,9 @@
-# Table of Contents
+---
+title: Table of contents
+description: A table that links to all contents.
+---
+
+## Table of Contents
 
 > Welcome to the table of contents. All the documentation and other references will be listed here so that you can access them in just a click!
 

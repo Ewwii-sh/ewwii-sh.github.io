@@ -1,9 +1,38 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ewwii-sh.github.io",
-  integrations: [tailwind()],
+  integrations: [
+    starlight({
+      title: "Ewwii",
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/Ewwii-sh/",
+        },
+      ],
+      sidebar: [
+        {
+          label: "Introduction",
+          link: "/docs/introduction",
+        },
+        {
+          label: "Getting Started",
+          autogenerate: { directory: "docs/getting-started" },
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "docs/reference" },
+        },
+      ],
+    }),
+  ],
+  redirects: {
+    "/docs": "/docs/introduction",
+    "/docs/getting-started": "/docs/getting-started/installation",
+    "/docs/reference": "/docs/reference/table_of_contents",
+  },
 });

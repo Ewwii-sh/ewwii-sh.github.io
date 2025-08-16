@@ -1,4 +1,9 @@
-# Ewwii - Widgets for everyone made better!
+---
+title: Introduction
+description: Introduction to ewwii.
+---
+
+## Ewwii - Widgets for everyone made better!
 
 Ewwii (ElKowar's Wacky Widgets improved interface) is a foork of
 Eww (ElKowar's Wacky Widgets) which is a
@@ -7,11 +12,11 @@ which lets you create your own widgets similarly to how you can in AwesomeWM.
 
 **Strength of Ewwii over Eww:**
 
--   Full-fledged scripting & expressions
--   User-defined widget trees & composition
--   Built-in configuration libraries
--   Builtin tooling for better developer experience
--   Full control over reactive updates (user defines if widget should update dynamically)
+- Full-fledged scripting & expressions
+- User-defined widget trees & composition
+- Built-in configuration libraries
+- Builtin tooling for better developer experience
+- Full control over reactive updates (user defines if widget should update dynamically)
 
 Ewwii is configured in [Rhai](https://rhai.rs/)
 and themed using [CSS](https://en.wikipedia.org/wiki/CSS)
