@@ -44,7 +44,7 @@ enter([
 ])
 ```
 
-This is not that complex once you know the parameters of defwindow as most of the other widgets only take in properties or optinally children. **Poll/Listen** are the only things that is similar to `defwindow` and you will learn about it later in the [variables chapter](./variables.md).
+This is not that complex once you know the parameters of defwindow as most of the other widgets only take in properties or optinally children. **Poll/Listen** are the only things that is similar to `defwindow` and you will learn about it later in the [variables chapter](../variables).
 
 ## The root
 
