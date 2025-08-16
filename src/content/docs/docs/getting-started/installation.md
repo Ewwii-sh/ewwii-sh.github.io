@@ -1,11 +1,18 @@
-# Installation
+---
+title: Installation
+description: Guide to installing ewwii.
+sidebar:
+  order: 0
+---
+
+## Installation
 
 The first step of using Ewwii is installing it. You would need to have the following prerequesties installed on your system to build/install ewwii.
 
 **Prerequesties:**
 
--   rustc
--   cargo
+- rustc
+- cargo
 
 Rather than with your system package manager,
 I **strongly** recommend installing it using [rustup](https://rustup.rs/).
@@ -17,21 +24,21 @@ The following list of package names should work for arch linux:
 <details>
 <summary><strong>Packages (click here)</strong></summary>
 
--   gtk3 (libgdk-3, libgtk-3)
--   gtk-layer-shell (only on Wayland)
--   pango (libpango)
--   gdk-pixbuf2 (libgdk_pixbuf-2)
--   libdbusmenu-gtk3
--   cairo (libcairo, libcairo-gobject)
--   glib2 (libgio, libglib-2, libgobject-2)
--   gcc-libs (libgcc)
--   glibc
+- gtk3 (libgdk-3, libgtk-3)
+- gtk-layer-shell (only on Wayland)
+- pango (libpango)
+- gdk-pixbuf2 (libgdk_pixbuf-2)
+- libdbusmenu-gtk3
+- cairo (libcairo, libcairo-gobject)
+- glib2 (libgio, libglib-2, libgobject-2)
+- gcc-libs (libgcc)
+- glibc
 
 </details>
 
 > **Note** that you will most likely need the -devel variants of your distro's packages to be able to compile ewwii.
 
-## Building
+### Building
 
 Once you have the prerequisites ready, you're ready to install and build ewwii.
 
@@ -58,7 +65,7 @@ When you're on Wayland, build with:
 cargo build --release --no-default-features --features=wayland
 ```
 
-## Running ewwii
+### Running ewwii
 
 Once you've built it you can now run it by entering:
 
@@ -79,7 +86,7 @@ Then to run it, enter:
 ./ewwii open <window_name>
 ```
 
-## Installing via package managers
+### Installing via package managers
 
 If you don't want to go through the _very_ tedious task of cloning and building ewwii, you can install it using Cargo (Rust crate manager).
 
