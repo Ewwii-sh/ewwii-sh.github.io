@@ -16,6 +16,7 @@ It explains how to use Ewwii's configuration language **Rhai**, run commands, an
 Here’s a simple configuration that creates a window containing a label:
 
 ```rust
+// ewwii.rhai
 fn foo() {
     return box(#{
         class: "widget1",
