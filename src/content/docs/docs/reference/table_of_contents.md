@@ -18,5 +18,5 @@ Dense documentation contains maximum detail for users who need full reference ma
 
 - **[Ewwii full documentation](https://ewwii-sh.github.io/ewwii)**
 - **[Eiipm full documentation](https://ewwii-sh.github.io/eiipm)**
-- **[Ewwii Plugins](https://ewwii-sh.github.io/plugins)**
+- **Ewwii Plugins docs**
   - **[Statictranspl](https://ewwii-sh.github.io/statictranspl)**
