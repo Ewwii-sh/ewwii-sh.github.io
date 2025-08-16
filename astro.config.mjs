@@ -25,6 +25,10 @@ export default defineConfig({
           autogenerate: { directory: "docs/getting-started" },
         },
         {
+          label: "Configuration",
+          autogenerate: { directory: "docs/configuration" },
+        },
+        {
           label: "Reference",
           autogenerate: { directory: "docs/reference" },
         },
