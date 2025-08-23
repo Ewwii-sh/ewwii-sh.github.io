@@ -19,7 +19,7 @@ Downloads, builds if needed, and installs a package.
 **Examples:**
 
 ```bash
-eiipm install statictranspl
+eiipm install staticscript
 eiipm i ewwii
 ```
 
@@ -37,7 +37,7 @@ Removes a package and its tracked files.
 **Examples:**
 
 ```bash
-eiipm rm statictranspl
+eiipm rm staticscript
 ```
 
 ## Updating
@@ -55,7 +55,7 @@ Updates a specific package or all installed packages if none specified.
 
 ```bash
 eiipm up # update all
-eiipm up statictranspl # update one
+eiipm up staticscript # update one
 ```
 
 ## Listing
@@ -79,6 +79,6 @@ Shows installed packages. Can filter by name, show detailed info, or count.
 eiipm l
 eiipm l -v
 eiipm l -t
-eiipm l -q statictranspl
-eiipm l -q statictranspl -v
+eiipm l -q staticscript
+eiipm l -q staticscript -v
 ```
