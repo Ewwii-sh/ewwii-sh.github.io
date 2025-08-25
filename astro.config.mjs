@@ -25,14 +25,6 @@ export default defineConfig({
           autogenerate: { directory: "docs/getting-started" },
         },
         {
-          label: "Configuration",
-          autogenerate: { directory: "docs/configuration" },
-        },
-        {
-          label: "Package Manager",
-          autogenerate: { directory: "docs/package-manager" },
-        },
-        {
           label: "Reference",
           autogenerate: { directory: "docs/reference" },
         },

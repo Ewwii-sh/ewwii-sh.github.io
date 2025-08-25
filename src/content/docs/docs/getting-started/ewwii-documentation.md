@@ -5,15 +5,9 @@ sidebar:
   order: 1
 ---
 
-## Reading Ewwii Documentation
+To get your first widget running, you can read the [Ewwii documentation](https://ewwii-sh.github.io/ewwii).
 
-To get your first widget running, start with the [Ewwii documentation overview](https://ewwii-sh.github.io/docs/configuration/configuration).
-
-This simple overview is extracted from the [full ewwii documentation](https://ewwii-sh.github.io/ewwii) and explains how you can use ewwii's configuration language **Rhai**.
-
-Once you are done with the overview, you can move to the [full ewwii documentation](https://ewwii-sh.github.io/ewwii).
-
-Other than what you have learnt in the overview, the full documentation explains how to use built-in widgets, what each widget parameters expect, run ewwii commands, and troubleshoot common issues. You’ll also find example widget configurations you can adapt for your own setup.
+This documentation explains how to use built-in widgets, what each widget parameters expect, run ewwii commands, and troubleshoot common issues. You’ll also find example widget configurations you can adapt for your own setup.
 
 ### Minimal Example
 
@@ -46,5 +40,4 @@ Try changing the label text to see how it updates in your widget.
 
 ### Reference
 
-- [Ewwii documentation overview](https://ewwii-sh.github.io/docs/configuration/)
-- [Full Ewwii documentation](https://ewwii-sh.github.io/ewwii)
+- [Ewwii documentation](https://ewwii-sh.github.io/ewwii)
