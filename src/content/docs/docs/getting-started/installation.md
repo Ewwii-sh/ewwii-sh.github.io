@@ -5,9 +5,7 @@ sidebar:
   order: 0
 ---
 
-## Installation
-
-### Installing ewwii
+## Installing ewwii
 
 The first step of using Ewwii is installing it. You would need to have the following prerequesties installed on your system to build/install ewwii.
 
@@ -40,7 +38,7 @@ The following list of package names should work for arch linux:
 
 > **Note** that you will most likely need the -devel variants of your distro's packages to be able to compile ewwii.
 
-#### Building
+### Building
 
 Once you have the prerequisites ready, you're ready to install and build ewwii.
 
@@ -67,7 +65,7 @@ When you're on Wayland, build with:
 cargo build --release --no-default-features --features=wayland
 ```
 
-#### Running ewwii
+### Running ewwii
 
 Once you've built it you can now run it by entering:
 
@@ -88,7 +86,7 @@ Then to run it, enter:
 ./ewwii open <window_name>
 ```
 
-#### Installing via package managers
+### Installing via package managers
 
 If you don't want to go through the _very_ tedious task of cloning and building ewwii, you can install it using Cargo (Rust crate manager).
 
@@ -98,13 +96,41 @@ You can run the following command to install ewwii from cargo:
 cargo install --git https://github.com/Ewwii-sh/ewwii
 ```
 
-### Installing eiipm
+---
+
+## Installing eiipm
 
 **eiipm** is the official package manager for Ewwii. It's recommended to install it alongside Ewwii to easily manage packages.
 
 You can install **eiipm** using the same methods as Ewwii:
 
-#### 1. From source
+### 1. From installer (Linux Only)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Ewwii-sh/eiipm/main/install.sh -o install.sh
+less install.sh # inspect installer code (optional)
+sh install.sh # run the installer
+```
+
+After, after the installation, verify it works:
+
+```bash
+eiipm --version
+```
+
+> The installer installs the binary to `/usr/local/bin`
+>
+> If eiipm doesn't work after the installation, make sure that `/usr/local/bin` is in path.
+
+### 2. From GitHub releases (Linux Only)
+
+If you are on Linux, then you can install the pre-built binary from [eiipm GitHub releases](https://github.com/Ewwii-sh/eiipm/releases/latest).
+
+- Go to the latest GitHub release. [Click Me!](https://github.com/Ewwii-sh/eiipm/releases/latest)
+- Install the binary (that is named `eiipm`) from assets section.
+- Voila! You now have eiipm installed!
+
+### 3. From source
 
 ```bash
 git clone https://github.com/Ewwii-sh/eiipm
@@ -114,7 +140,7 @@ cargo build --release
 
 This will generate the `eiipm` binary in `target/release`.
 
-#### 2. Using Cargo
+### 4. Using Cargo
 
 ```bash
 cargo install --git https://github.com/Ewwii-sh/eiipm
