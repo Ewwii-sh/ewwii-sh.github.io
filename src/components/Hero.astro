@@ -1,58 +1,77 @@
-<section class="relative bg-[#212223] text-[#f5f5f5] py-10 px-6 text-center">
-  <!-- Logo + Name -->
-  <div class="flex items-center justify-center mb-8 gap-4">
+<section class="relative bg-[#212223] text-[#f5f5f5] py-16 px-6 text-center overflow-hidden">
+  <!-- Background animated gradient -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#212223] via-[#1e1f21] to-[#212223] animate-gradient-bg opacity-40"></div>
+  </div>
+
+  <!-- Logo -->
+  <div class="flex items-center justify-center mb-6 gap-4 transform transition-all duration-500 hover:scale-105">
     <img 
       src="/EwwiiLogo.png"
       width="82" 
       height="82" 
       alt="Ewwii Logo" 
-      class="drop-shadow-lg"
+      class="drop-shadow-xl"
     />
-	<span class="text-7xl sm:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] bg-clip-text text-transparent animate-gradient-x">
-	Ewwii</span>
+    <span class="text-7xl sm:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] bg-clip-text text-transparent animate-gradient-x">
+      Ewwii
+    </span>
   </div>
 
   <!-- Hero Title -->
-  <h2 class="text-xl sm:text-2xl font-medium tracking-wide mb-8 text-gray-400">
+  <h2 class="text-xl sm:text-2xl font-medium tracking-wide mb-6 text-gray-400 relative inline-block">
     “Building Widgets Made Better”
+    <span class="block h-1 w-0 bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] mt-2 rounded animate-underline"></span>
   </h2>
 
-  <p class="max-w-2xl mx-auto text-lg text-gray-300">
+  <!-- Description -->
+  <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-10">
     Ewwii is a flexible, resource-efficient, and scriptable widget system that integrates seamlessly with any programming language, letting developers build powerful interfaces quickly.
   </p>
 
   <!-- Hero CTAs -->
-  <div class="mt-10 flex justify-center gap-6 flex-wrap">
+  <div class="flex justify-center gap-6 flex-wrap">
     <a 
       href="/docs" 
-      class="bg-[#ff914c] hover:bg-[#d08f65] text-[#212223] px-8 py-3 rounded-lg font-semibold shadow-lg transition"
+      class="bg-[#ff914c] hover:bg-[#d08f65] text-[#212223] px-8 py-3 rounded-lg font-semibold shadow-lg transform hover:-translate-y-1 hover:scale-105 transition"
     >
       Get Started
     </a>
     <a 
       href="https://github.com/Ewwii-sh" 
-      class="border-2 border-[#edfbfe] text-[#edfbfe] px-8 py-3 rounded-lg font-semibold hover:bg-[#edfbfe] hover:text-[#212223] transition"
+      class="border-2 border-[#edfbfe] text-[#edfbfe] px-8 py-3 rounded-lg font-semibold hover:bg-[#edfbfe] hover:text-[#212223] transform hover:-translate-y-1 hover:scale-105 transition"
     >
       View on GitHub
     </a>
   </div>
-
-  <!-- Background accent -->
-  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[#212223] to-black opacity-80"></div>
 </section>
 
 <style>
 @keyframes gradient-x {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  background-size: 300% 300%;
+  animation: gradient-x 5s ease infinite;
 }
 
-.animate-gradient-x {
+/* Subtle gradient background */
+@keyframes gradient-bg {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+.animate-gradient-bg {
   background-size: 200% 200%;
-  animation: gradient-x 5s ease infinite;
+  animation: gradient-bg 12s ease-in-out infinite alternate;
+}
+
+/* Heading underline animation */
+@keyframes underline-grow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.animate-underline {
+  animation: underline-grow 1s ease forwards;
 }
 </style>
