@@ -37,8 +37,18 @@ const versionSections = markdown
 
 ---
 <Layout>
-  <section class="flex flex-col md:flex-row min-h-screen bg-[#212223] text-[#f5f5f5]">
-    <aside class="w-full md:w-1/4 bg-[#1e1f21] border-r border-gray-700 p-4 overflow-y-auto sticky top-0 h-screen">
+  <section class="flex flex-col md:flex-row min-h-screen bg-[#212223] text-[#f5f5f5] relative">
+
+    <!-- Mobile top bar -->
+    <div class="md:hidden flex justify-between items-center p-4 bg-[#1e1f21] border-b border-gray-700">
+      <h2 class="text-xl font-bold">Versions</h2>
+      <button id="toggleSidebar" class="px-2 py-1 bg-[#ff914c] text-[#212223] rounded" aria-expanded="false">☰</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden md:hidden"></div>
+
+    <aside id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-[#1e1f21] z-50 transform -translate-x-full transition-transform duration-300 md:relative md:translate-x-0 md:w-1/4 md:block">
       <h2 class="text-2xl font-bold mb-4">Versions</h2>
       <ul class="flex flex-col gap-2">
         {versionSections.map((v, i) => (
@@ -54,22 +64,28 @@ const versionSections = markdown
       </ul>
     </aside>
 
-  <main class="flex-1 p-6 overflow-y-auto space-y-8">
-    <a href="/" class="inline-block mb-4 px-4 py-2 bg-[#ff914c] text-[#212223] rounded hover:bg-[#e6853f] transition">
-      &laquo; Return Home
-    </a>
+    <!-- Resizer for desktop -->
+    <div id="resizer" class="hidden md:block w-2 cursor-col-resize bg-gray-700"></div>
 
-    {versionSections.map((v, i) => (
-      <div
-        id={`version-${i}`}
-        class={`version-content ${i === 0 ? '' : 'hidden'}`}
-        set:html={v!.html}
-      />
-    ))}
-  </main>
+    <!-- Main content -->
+    <main id="content" class="flex-1 p-6 overflow-y-auto space-y-8">
+      <a href="/" class="inline-block mb-4 px-4 py-2 bg-[#ff914c] text-[#212223] rounded hover:bg-[#e6853f] transition">
+        &laquo; Return Home
+      </a>
+
+      {versionSections.map((v, i) => (
+        <div
+          id={`version-${i}`}
+          class={`version-content ${i === 0 ? '' : 'hidden'}`}
+          set:html={v!.html}
+        />
+      ))}
+    </main>
   </section>
 
+  <!-- Scripts -->
   <script>
+    // Version switching
     const buttons = document.querySelectorAll('.version-btn');
     const panels = document.querySelectorAll('.version-content');
     buttons.forEach(btn => {
@@ -83,6 +99,61 @@ const versionSections = markdown
       });
     });
     if (buttons.length > 0) buttons[0].classList.add('active');
+
+    // Sidebar toggle (mobile)
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const toggleBtn = document.getElementById('toggleSidebar');
+    function openSidebar() {
+      sidebar!.classList.remove('-translate-x-full');
+      overlay!.classList.remove('hidden');
+      toggleBtn!.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeSidebar() {
+      sidebar!.classList.add('-translate-x-full');
+      overlay!.classList.add('hidden');
+      toggleBtn!.setAttribute('aria-expanded', 'false');
+    }
+
+    toggleBtn?.addEventListener('click', () => {
+      if (sidebar!.classList.contains('-translate-x-full')) {
+        openSidebar();
+      } else {
+        closeSidebar();
+      }
+    });
+
+    overlay?.addEventListener('click', closeSidebar);
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.innerWidth < 768) closeSidebar();
+      });
+    });
+
+
+    // Draggable resizer (desktop only)
+    const resizer = document.getElementById('resizer');
+    resizer?.addEventListener('mousedown', (_) => {
+      if (window.innerWidth < 768) return; // ignore on mobile
+      document.body.style.userSelect = 'none';
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('mouseup', stopDrag);
+    });
+
+    function doDrag(e: any) {
+      const newWidth = e.clientX;
+      if (newWidth > 100 && newWidth < window.innerWidth - 100) {
+        sidebar!.style.width = newWidth + 'px';
+      }
+    }
+
+    function stopDrag() {
+      document.removeEventListener('mousemove', doDrag);
+      document.removeEventListener('mouseup', stopDrag);
+      document.body.style.userSelect = '';
+    }
   </script>
 
   <Footer />
@@ -100,6 +171,22 @@ const versionSections = markdown
 
 .version-btn.active:hover {
   background-color: #ffb380;
+}
+
+@media (max-width: 767px) {
+  #sidebar {
+    position: absolute;
+    z-index: 50;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #1e1f21;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+  }
+  #sidebar:not(.hidden) {
+    transform: translateX(0);
+  }
 }
 
 .version-content {
