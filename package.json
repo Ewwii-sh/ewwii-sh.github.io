@@ -9,8 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-component": "^1.0.5",
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.13.5",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
     "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2"
   }
 }
