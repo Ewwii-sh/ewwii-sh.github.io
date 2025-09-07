@@ -47,7 +47,7 @@ const versionSections = markdown
               class="w-full text-left px-3 py-2 rounded hover:bg-[#2a2b2d] transition version-btn"
               data-index={i}
             >
-              {v.version}
+              {v!.version}
             </button>
           </li>
         ))}
@@ -63,7 +63,7 @@ const versionSections = markdown
       <div
         id={`version-${i}`}
         class={`version-content ${i === 0 ? '' : 'hidden'}`}
-        set:html={v.html}
+        set:html={v!.html}
       />
     ))}
   </main>
