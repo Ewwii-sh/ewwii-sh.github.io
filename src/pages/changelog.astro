@@ -44,7 +44,7 @@ const versionSections = markdown
         {versionSections.map((v, i) => (
           <li>
             <button
-              class="w-full text-left px-3 py-2 rounded hover:bg-[#2a2b2d] transition version-btn"
+              class="w-full text-left px-3 py-2 rounded hover:bg-[#3a3b3d] transition version-btn"
               data-index={i}
             >
               {v!.version}
@@ -78,19 +78,30 @@ const versionSections = markdown
         const index = element.dataset.index;
         panels.forEach(p => p.classList.add('hidden'));
         document.getElementById('version-' + index)?.classList.remove('hidden');
-        buttons.forEach(b => b.classList.remove('bg-[#ff914c]', 'text-[#212223]'));
-        btn.classList.add('bg-[#ff914c]', 'text-[#212223]');
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
       });
     });
-    if (buttons.length > 0) {
-      buttons[0].classList.add('bg-[#ff914c]', 'text-[#212223]');
-    }
+    if (buttons.length > 0) buttons[0].classList.add('active');
   </script>
 
   <Footer />
 </Layout>
 
 <style is:global>
+.version-btn:hover {
+  background-color: #3a3b3d;
+}
+
+.version-btn.active {
+  background-color: #ff914c;
+  color: #212223;
+}
+
+.version-btn.active:hover {
+  background-color: #ffb380;
+}
+
 .version-content {
   transition: all 0.3s ease;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
