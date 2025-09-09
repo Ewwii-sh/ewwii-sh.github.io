@@ -1,6 +1,7 @@
 ---
 import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 ---
 
 <Layout>
@@ -36,54 +37,59 @@ import Layout from '../layouts/Layout.astro';
         </p>
 
         <!-- Button Card -->
-        <div class="bg-[#1e1f21] p-8 rounded-2xl shadow-xl max-w-md mx-auto flex flex-col gap-4">
-            <a href="/ewwii/installation.html" class="w-full bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] text-[#212223] px-6 py-3 rounded-lg font-semibold shadow-lg transform hover:-translate-y-1 hover:scale-105 transition text-center">
-            Install Ewwii
+        <div class="bg-[#1e1f21] p-8 rounded-2xl shadow-xl max-w-full mx-auto text-center">
+            <a href="/ewwii/installation.html" class="inline-block w-[20rem] m-2">
+                <Card title="Install Ewwii" description="Follow these steps to get started with ewwii." />
             </a>
-            <a href="/eiipm/introduction.html" class="w-full bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] text-[#212223] px-6 py-3 rounded-lg font-semibold shadow-lg transform hover:-translate-y-1 hover:scale-105 transition text-center">
-            Install Eiipm
+            <a href="/eiipm/introduction.html" class="inline-block w-[20rem] m-2">
+                <Card title="Install Eiipm" description="Install eiipm, ewwii's package manager for easy installation and management of ewwii tools." />
             </a>
-            <a href="/ewwii" class="w-full border-2 border-[#edfbfe] text-[#edfbfe] px-6 py-3 rounded-lg font-semibold hover:bg-[#edfbfe] hover:text-[#212223] transform hover:-translate-y-1 hover:scale-105 transition text-center">
-            Read Ewwii Docs
+            <a href="/ewwii" class="inline-block w-[20rem] m-2">
+                <Card title="Read Ewwii Docs" description="Read the ewwii docs to get your first widget loading!" />
             </a>
-            <a href="/eiipm" class="w-full border-2 border-[#edfbfe] text-[#edfbfe] px-6 py-3 rounded-lg font-semibold hover:bg-[#edfbfe] hover:text-[#212223] transform hover:-translate-y-1 hover:scale-105 transition text-center">
-            Read Eiipm Docs
+            <a href="/eiipm" class="inline-block w-[20rem] m-2">
+                <Card title="Read Eiipm Docs" description="Learn about the commands and features in eiipm." />
             </a>
-            <a href="/" class="w-full border-2 border-[#ff914c] text-[#ff914c] px-6 py-3 rounded-lg font-semibold hover:bg-[#ff914c] hover:text-[#212223] transform hover:-translate-y-1 hover:scale-105 transition text-center">
-            Return Home
+            <a href="/tools" class="inline-block w-[20rem] m-2">
+                <Card title="Explore ecosystem tools" description="Explore the ewwii ecosystem and find tools that may suite you." />
             </a>
         </div>
-    </section>
 
-    <style>
+        <!-- Return Home Button -->
+        <a href="/" class="border-2 border-[#ff914c] text-[#ff914c] px-6 py-3 rounded-lg font-semibold hover:bg-[#ff914c] hover:text-[#212223] transition text-center">
+            Return Home
+        </a>
+    </section>
+    <Footer />
+</Layout>
+
+
+<style>
     @keyframes gradient-x {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     .animate-gradient-x {
-    background-size: 300% 300%;
-    animation: gradient-x 5s ease infinite;
+        background-size: 300% 300%;
+        animation: gradient-x 5s ease infinite;
     }
 
     /* Subtle gradient background */
     @keyframes gradient-bg {
-    0%, 100% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
+        0%, 100% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
     }
     .animate-gradient-bg {
-    background-size: 200% 200%;
-    animation: gradient-bg 12s ease-in-out infinite alternate;
+        background-size: 200% 200%;
+        animation: gradient-bg 12s ease-in-out infinite alternate;
     }
 
     /* Heading underline animation */
     @keyframes underline-grow {
-    from { width: 0; }
-    to { width: 100%; }
+        from { width: 0; }
+        to { width: 100%; }
     }
     .animate-underline {
-    animation: underline-grow 1s ease forwards;
+        animation: underline-grow 1s ease forwards;
     }
-    </style>
-
-    <Footer />
-</Layout>
+</style>
