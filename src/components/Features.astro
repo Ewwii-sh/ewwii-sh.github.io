@@ -1,85 +1,14 @@
+---
+import Card from './Card.astro';
+---
+
 <section class="bg-[#212223] text-[#f5f5f5] py-10 px-6">
-  <!-- Features grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
-    <!-- Feature Card Template -->
-    <div class="feature-card">
-      <h3>Full-fledged scripting & expressions</h3>
-      <p>Use powerful scripts and expressions to control widgets dynamically.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>User-defined widget trees & composition</h3>
-      <p>Build complex interfaces by composing custom widget trees effortlessly.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>Built-in configuration libraries</h3>
-      <p>Leverage prebuilt libraries for easy configuration and setup of your widgets.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>Builtin tooling for better developer experience</h3>
-      <p>Tools designed to streamline development, debugging, and deployment.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>X11 + Wayland compatibility</h3>
-      <p>Seamlessly run your widgets on both X11 and Wayland environments.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>Hot Reload</h3>
-      <p>Instantly see changes during development without restarting your app.</p>
-    </div>
-
+    <Card title="Full-fledged scripting & expressions" description="Use powerful scripts and expressions to control widgets dynamically." />
+    <Card title="User-defined widget trees & composition" description="Build complex interfaces by composing custom widget trees effortlessly." />
+    <Card title="Built-in configuration libraries" description="Leverage prebuilt libraries for easy configuration and setup of your widgets." />
+    <Card title="Builtin tooling for better developer experience" description="Tools designed to streamline development, debugging, and deployment." />
+    <Card title="X11 + Wayland compatibility" description="Seamlessly run your widgets on both X11 and Wayland environments." />
+    <Card title="Hot Reload" description="Instantly see changes during development without restarting your app." />
   </div>
 </section>
-
-<style>
-.feature-card {
-  background: linear-gradient(145deg, #262728, #1f1f20);
-  padding: 1.75rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
-  text-align: center;
-}
-
-.feature-card h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  position: relative;
-  display: inline-block;
-  color: #ff914c;
-}
-
-.feature-card h3::after {
-  content: "";
-  display: block;
-  height: 3px;
-  width: 0;
-  background: linear-gradient(to right, #ff914c, #d08f65, #ff914c);
-  transition: width 0.5s ease;
-  border-radius: 2px;
-  margin-top: 4px;
-}
-
-.feature-card:hover h3::after {
-  width: 100%;
-}
-
-.feature-card p {
-  color: #c0c0c0;
-  font-size: 0.95rem;
-  margin-top: 0.25rem;
-}
-
-/* Hover effects */
-.feature-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-}
-</style>
