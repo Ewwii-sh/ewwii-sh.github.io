@@ -1,0 +1,56 @@
+---
+import Prism from 'prismjs';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism-tomorrow.css';
+
+interface Props {
+    file?: string;
+    code: string;
+}
+
+const { file = "", code } = Astro.props;
+
+// Highlight JS code
+const highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+---
+
+<div class="codeblock">
+    {file && <p class="file-name">{file}</p>}
+    <pre><code class="language-js" set:html={highlightedCode}></code></pre>
+</div>
+
+<style>
+.codeblock {
+    margin: 1em 0;
+    font-family: 'Fira Code', monospace;
+    background: #1f1f20;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    overflow-x: auto;
+}
+
+.codeblock .file-name {
+    background: #333;
+    color: #ff914c;
+    padding: 0.5em 1em;
+    border-radius: 1rem 1rem 0 0;
+    font-size: 0.9em;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.codeblock pre {
+    background: #1f1f20;
+    color: #c0c0c0;
+    padding: 1em;
+    margin: 0;
+    border-radius: 0 0 1rem 1rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.codeblock code {
+    font-family: inherit;
+    white-space: pre-wrap;
+}
+</style>
