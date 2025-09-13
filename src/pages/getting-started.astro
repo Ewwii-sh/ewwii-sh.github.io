@@ -5,12 +5,7 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout>
-    <section class="relative bg-[#121111] text-[#f5f5f5] py-16 px-6 text-center overflow-hidden">
-        <!-- Background animated gradient -->
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute inset-0 bg-gradient-to-r from-[#121111] via-[#1e1f21] to-[#121111] animate-gradient-bg opacity-40"></div>
-        </div>
-
+    <section class="relative py-16 px-6 text-center overflow-hidden">
         <!-- Logo -->
         <div class="flex items-center justify-center mb-6 gap-4 transform transition-all duration-500 hover:scale-105">
             <img 
@@ -26,18 +21,18 @@ import Card from '../components/Card.astro';
         </div>
 
         <!-- Hero Title -->
-        <h2 class="text-xl sm:text-2xl font-medium tracking-wide mb-6 text-gray-400 relative inline-block">
+        <h2 class="hero-title">
             “Getting Started with Ewwii & Eiipm”
-            <span class="block h-1 w-0 bg-gradient-to-r from-[#ff914c] via-[#ffb96c] to-[#ff6a3d] mt-2 rounded animate-underline"></span>
+            <span class="underline"></span>
         </h2>
 
         <!-- Description -->
-        <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-12">
+        <p class="hero-desc">
             Follow the steps below to install and explore Ewwii and Eiipm!
         </p>
 
         <!-- Button Card -->
-        <div class="bg-[#1e1f21] p-8 rounded-2xl shadow-xl max-w-full mx-auto text-center mb-6">
+        <div class="p-8 rounded-2xl shadow-full max-w-full mx-auto text-center mb-6">
             <a href="/ewwii/installation.html" class="inline-block w-[20rem] m-2">
                 <Card title="Install Ewwii" description="Follow these steps to get started with ewwii." />
             </a>
@@ -65,6 +60,10 @@ import Card from '../components/Card.astro';
 
 
 <style>
+    .shadow-full {
+        box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
+    }
+
     @keyframes gradient-x {
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
