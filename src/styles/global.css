@@ -1,1 +1,223 @@
 @import "tailwindcss";
+
+/* General Text & Background Utilities */
+
+.text-gradient {
+  background: linear-gradient(90deg, #ff914c, #ffb96c, #ff6a3d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Gradient animation for text */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.animate-gradient-x {
+  background-size: 300% 300%;
+  animation: gradient-x 5s ease infinite;
+}
+
+@keyframes gradient-bg {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+.animate-gradient-bg {
+  background-size: 200% 200%;
+  animation: gradient-bg 12s ease-in-out infinite alternate;
+}
+
+/* hero header underline animation */
+@keyframes underline-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.animate-underline {
+  display: block;
+  height: 1px;
+  border-radius: 9999px;
+  animation: underline-grow 1s ease forwards;
+}
+
+.hover-scale {
+  transform: transition-all 0.5s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Card / Container Utilities */
+
+.card {
+  background: linear-gradient(145deg, #1a1a1a, #0f0e0e);
+  padding: 1.75rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid rgba(170, 170, 170, 0.2);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  color: #ff914c;
+}
+
+.card h3::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(to right, #ff914c, #d08f65, #ff914c);
+  transition: width 0.5s ease;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+.card:hover h3::after {
+  width: 100%;
+}
+
+.card p {
+  color: #c0c0c0;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Button utility classes */
+.btn {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #ff914c;
+  color: #121111;
+}
+.btn-primary:hover {
+  background-color: #d08f65;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid #edfbfe;
+  color: #edfbfe;
+  background-color: transparent;
+}
+.btn-outline:hover {
+  background-color: #edfbfe;
+  color: #121111;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.btn-outline-orange {
+  border: 2px solid #ff914c;
+  color: #ff914c;
+  background-color: transparent;
+}
+.btn-outline-orange:hover {
+  background-color: #ff914c;
+  color: #121111;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* -----------------------------
+   Background Section Utilities
+------------------------------ */
+
+/* Section wrapper utility */
+.section-dark {
+  position: relative;
+  background-color: #121111;
+  color: #f5f5f5;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.section-dark .bg-animated {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  opacity: 0.4;
+  background: linear-gradient(to right, #121111, #1e1f21, #121111);
+  animation: gradient-bg 12s ease-in-out infinite alternate;
+}
+
+/* Logo + heading utilities */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.5s ease;
+}
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+/* Hero title & description utilities */
+.hero-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  color: #9ca3af;
+  display: inline-block;
+  position: relative;
+}
+
+.hero-title .underline {
+  margin-top: 0.5rem;
+  display: block;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #ff914c, #ffb96c, #ff6a3d);
+  animation: underline-grow 1s ease forwards;
+}
+
+.hero-desc {
+  max-width: 42rem; /* max-w-2xl */
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.125rem; /* text-lg */
+  color: #d1d5db; /* text-gray-300 */
+  margin-bottom: 2.5rem;
+}
+
+/* Hero CTA container */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
