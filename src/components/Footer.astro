@@ -1,24 +1,33 @@
-<section class="bg-[#121111] text-[#f5f5f5] py-12 px-6 border-t border-gray-700">
+<section class="py-12 px-6 border-t border-gray-700">
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6">
 
     <!-- Links -->
-    <a href="/docs" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+    <a href="/docs" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
       Docs
     </a>
-      <a href="/changelog" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+      <a href="/changelog" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
       Changelog
     </a>
       </a>
-      <a href="/tools" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+      <a href="/tools" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
       Tools
     </a>
-    <a href="https://github.com/Ewwii-sh" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+    <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
       GitHub
     </a>
-    <a href="https://discord.gg/63bKPx3Wb6" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+    <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
       Discord
     </a>
 
+  </div>
+
+  <!-- Bottom Color Changer -->
+  <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;">
+    <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm">
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
   </div>
 
   <!-- Bottom text -->
@@ -26,3 +35,21 @@
     &copy; {new Date().getFullYear()} Ewwii. All rights reserved.
   </p>
 </section>
+
+<script>
+const html = document.documentElement;
+
+function setTheme(theme: any) {
+  html.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+const dropdown = document.getElementById("theme-dropdown") as HTMLSelectElement | null;
+if (dropdown) {
+  dropdown.value = html.getAttribute("data-theme") ?? "dark";
+
+  dropdown.addEventListener("change", () => {
+    setTheme(dropdown.value);
+  });
+}
+</script>
