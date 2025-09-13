@@ -1,17 +1,37 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.13.5"><meta property="og:title" content="Ewwii: A Widget System, better, powerful and extensible"><meta property="og:description" content="The official website of ewwii, a GTK widget system for building interactive GUI components with flexibility and extensibility."><meta name="description" content="Ewwii is a GTK widget system for building interactive, flexible, and extensible GUI components. Explore docs, examples, and get started today."><meta property="og:type" content="website"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/EwwiiLogo.png"><meta name="robots" content="index, follow"><title>Ewwii: A Widget System, better, powerful and extensible</title><link rel="stylesheet" href="/_astro/changelog.mDXK5vAk.css"></head> <body data-astro-cid-sckkx6r4>  <section class="relative bg-[#212223] text-[#f5f5f5] py-24 px-6 text-center overflow-hidden"> <div class="max-w-xl mx-auto"> <h1 class="text-6xl font-extrabold mb-4 animate-bounce">404</h1> <h2 class="text-3xl font-semibold mb-6">Oops! Page not found.</h2> <p class="text-[#ccc] mb-8">
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.13.5"><meta property="og:title" content="Ewwii: A Widget System, better, powerful and extensible"><meta property="og:description" content="The official website of ewwii, a GTK widget system for building interactive GUI components with flexibility and extensibility."><meta name="description" content="Ewwii is a GTK widget system for building interactive, flexible, and extensible GUI components. Explore docs, examples, and get started today."><meta property="og:type" content="website"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/EwwiiLogo.png"><meta name="robots" content="index, follow"><title>Ewwii: A Widget System, better, powerful and extensible</title><link rel="stylesheet" href="/_astro/changelog.BFA1aVp3.css"></head> <body data-astro-cid-sckkx6r4>  <section class="relative bg-[#121111] text-[#f5f5f5] py-24 px-6 text-center overflow-hidden"> <div class="max-w-xl mx-auto"> <h1 class="text-6xl font-extrabold mb-4 animate-bounce">404</h1> <h2 class="text-3xl font-semibold mb-6">Oops! Page not found.</h2> <p class="text-[#ccc] mb-8">
 The page you're looking for doesn't exist, or maybe it moved. But don't worry, we've got you covered.
-</p> <a href="/" class="inline-block bg-[#ff914c] hover:bg-[#d08f65] text-[#212223] px-8 py-3 rounded-lg font-semibold shadow-lg transform hover:-translate-y-1 hover:scale-105 transition">
+</p> <a href="/" class="inline-block bg-[#ff914c] hover:bg-[#d08f65] text-[#121111] px-8 py-3 rounded-lg font-semibold shadow-lg transform hover:-translate-y-1 hover:scale-105 transition">
 Back to Home
-</a> </div> </section> <section class="bg-[#212223] text-[#f5f5f5] py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+</a> </div> </section> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
 Docs
-</a> <a href="/changelog" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+</a> <a href="/changelog" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
 Changelog
-</a> <a href="/tools" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+</a> <a href="/tools" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
 Tools
-</a> <a href="https://github.com/Ewwii-sh" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
 GitHub
-</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-gray-300 hover:text-[#ff914c] transition font-medium">
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
 Discord
-</a> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
 &copy; 2025 Ewwii. All rights reserved.
-</p> </section>  </body></html>
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>
