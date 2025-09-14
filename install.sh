@@ -54,34 +54,52 @@ EWWII_LATEST_URL="https://github.com/$EWWII_REPO/releases/latest"
 TMP_DIR=$(mktemp -d)
 cd "$TMP_DIR"
 
+echo "${YELLOW}Which tool(s) do you want to install?${RESET}"
+echo "  [1] eiipm"
+echo "  [2] ewwii"
+echo "  [3] Both"
+printf "Enter choice [1/3]: "
+read tool_choice
+
 # --- Install eiipm ---
-EIIPM_DOWNLOAD_URL=$(curl -sL -o /dev/null -w '%{url_effective}' "$EIIPM_LATEST_URL" | sed 's/tag/download/')
-BIN_NAME="eiipm"
+if [ "$tool_choice" = "1" ] || [ "$tool_choice" = "3" ]; then
+    EIIPM_DOWNLOAD_URL=$(curl -sL -o /dev/null -w '%{url_effective}' "$EIIPM_LATEST_URL" | sed 's/tag/download/')
+    BIN_NAME="eiipm"
 
-echo "${BLUE}Downloading latest $BIN_NAME release...${RESET}"
-curl -sL "$EIIPM_DOWNLOAD_URL/$BIN_NAME" -o "$BIN_NAME"
+    echo "${BLUE}Downloading latest $BIN_NAME release...${RESET}"
+    curl -sL "$EIIPM_DOWNLOAD_URL/$BIN_NAME" -o "$BIN_NAME"
 
-echo "${BLUE}Granting $BIN_NAME executable permission...${RESET}"
-chmod +x "$BIN_NAME"
+    echo "${BLUE}Granting $BIN_NAME executable permission...${RESET}"
+    chmod +x "$BIN_NAME"
 
-echo "${BLUE}Installing $BIN_NAME to /usr/local/bin (requires sudo)...${RESET}"
-sudo mv "$BIN_NAME" /usr/local/bin/
+    echo "${BLUE}Installing $BIN_NAME to /usr/local/bin (requires sudo)...${RESET}"
+    sudo mv "$BIN_NAME" /usr/local/bin/
+fi
 
 # --- Install ewwii ---
-EWWII_DOWNLOAD_URL=$(curl -sL -o /dev/null -w '%{url_effective}' "$EWWII_LATEST_URL" | sed 's/tag/download/')
-BIN_NAME="ewwii"
+if [ "$tool_choice" = "2" ] || [ "$tool_choice" = "3" ]; then
+    EWWII_DOWNLOAD_URL=$(curl -sL -o /dev/null -w '%{url_effective}' "$EWWII_LATEST_URL" | sed 's/tag/download/')
+    BIN_NAME="ewwii"
 
-echo "${BLUE}Downloading latest $BIN_NAME release...${RESET}"
-curl -sL "$EWWII_DOWNLOAD_URL/$BIN_NAME" -o "$BIN_NAME"
+    echo "${BLUE}Downloading latest $BIN_NAME release...${RESET}"
+    curl -sL "$EWWII_DOWNLOAD_URL/$BIN_NAME" -o "$BIN_NAME"
 
-echo "${BLUE}Granting $BIN_NAME executable permission...${RESET}"
-chmod +x "$BIN_NAME"
+    echo "${BLUE}Granting $BIN_NAME executable permission...${RESET}"
+    chmod +x "$BIN_NAME"
 
-echo "${BLUE}Installing $BIN_NAME to /usr/local/bin (requires sudo)...${RESET}"
-sudo mv "$BIN_NAME" /usr/local/bin/
+    echo "${BLUE}Installing $BIN_NAME to /usr/local/bin (requires sudo)...${RESET}"
+    sudo mv "$BIN_NAME" /usr/local/bin/
+fi
 
 # --- Finish ---
 echo ""
 echo "${GREEN}${BOLD}⭐✨ Installation complete! ✨⭐${RESET}"
 echo ""
-echo "Run '${BOLD}eiipm${RESET}' or '${BOLD}ewwii${RESET}' to get started."
+
+if [ "$tool_choice" = "1" ]; then
+    echo "Run '${BOLD}eiipm${RESET}' to get started."
+elif [ "$tool_choice" = "2" ]; then
+    echo "Run '${BOLD}ewwii${RESET}' to get started."
+else
+    echo "Run '${BOLD}eiipm${RESET}' or '${BOLD}ewwii${RESET}' to get started."
+fi
