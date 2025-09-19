@@ -6,22 +6,22 @@
 
 :root {
   /* Dark theme (default) */
-  --bg-color: #121111;
+  --bg-color: #1b1b1d;
   --text-color: #f5f5f5;
   --text-gray: #c0c0c0;
   --text-gray-2: #9ca3af;
-  --card-bg: linear-gradient(145deg, #1a1a1a, #0f0e0e);
+  --card-bg: linear-gradient(145deg, #212123, #161617);
   --card-border: rgba(170, 170, 170, 0.2);
   --btn-primary-bg: #ff914c;
-  --btn-primary-text: #121111;
+  --btn-primary-text: #1b1b1d;
   --btn-primary-hover: #d08f65;
   --btn-outline-border: #edfbfe;
   --btn-outline-text: #edfbfe;
   --btn-outline-hover-bg: #edfbfe;
-  --btn-outline-hover-text: #121111;
+  --btn-outline-hover-text: #1b1b1d;
   --gradient-text: linear-gradient(90deg, #ff914c, #ffb96c, #ff6a3d);
   --gradient-underline: linear-gradient(to right, #ff914c, #ffb96c, #ff6a3d);
-  --bg-animated: linear-gradient(to right, #121111, #1e1f21, #121111);
+  --bg-animated: linear-gradient(to right, #1b1b1d, #1e1f21, #1b1b1d);
   --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.4);
   --shadow-card-hover: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
@@ -29,7 +29,7 @@
 /* Light theme overrides */
 [data-theme="light"] {
   --bg-color: #fdfdfd;
-  --text-color: #121111;
+  --text-color: #1b1b1d;
   --text-gray: #4b5563;
   --text-gray-2: #6b7280;
   --card-bg: linear-gradient(145deg, #ffffff, #f1f1f1);
@@ -37,9 +37,9 @@
   --btn-primary-bg: #ff914c;
   --btn-primary-text: #ffffff;
   --btn-primary-hover: #e67e3f;
-  --btn-outline-border: #121111;
-  --btn-outline-text: #121111;
-  --btn-outline-hover-bg: #121111;
+  --btn-outline-border: #1b1b1d;
+  --btn-outline-text: #1b1b1d;
+  --btn-outline-hover-bg: #1b1b1d;
   --btn-outline-hover-text: #ffffff;
   --gradient-text: linear-gradient(90deg, #ff914c, #ffb96c, #ff6a3d);
   --gradient-underline: linear-gradient(to right, #ff914c, #ffb96c, #ff6a3d);
