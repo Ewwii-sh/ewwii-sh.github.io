@@ -8,15 +8,33 @@ import '../styles/global.css';
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/EwwiiLogo.png" />
+		<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- Title and Description -->
+		<title>Ewwii: Best eww alternative | Modern GTK Widget System for Linux Ricing</title>
+		<meta name="description" content="Ewwii is a powerful, extensible GTK widget system and modern alternative to eww. Build beautiful, interactive widgets for Hyprland, Wayland, X11 and Linux desktop customization." />
+
+		<!-- Open Graph -->
 		<meta property="og:title" content="Ewwii: A Widget System, better, powerful and extensible" />
 		<meta property="og:description" content="The official website of ewwii, a GTK widget system for building interactive GUI components with flexibility and extensibility." />
-		<meta name="description" content="Ewwii is a GTK widget system for building interactive, flexible, and extensible GUI components. Explore docs, examples, and get started today." />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://ewwii-sh.github.io" />
 		<meta property="og:image" content="https://ewwii-sh.github.io/EwwiiLogo.png" />
+
 		<meta name="robots" content="index, follow">
-		<title>Ewwii: A Widget System, better, powerful and extensible</title>
+        <meta name="keywords" content="eww alternative, eww linux, linux widget system, gtk widgets, hyprland widgets, linux ricing, desktop customization" />
+
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Ewwii",
+          "description": "Modern extensible GTK widget system for Linux desktop customization",
+          "url": "https://ewwii-sh.github.io",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Linux",
+          "offers": { "@type": "Offer", "price": "0" }
+        })} />
 	</head>
 	<body>
 		<slot />

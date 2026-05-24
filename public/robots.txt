@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ewwii-sh.github.io/sitemap-index.xml
