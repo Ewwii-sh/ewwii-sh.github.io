@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+const canonicalURL = new URL(Astro.request.url, Astro.site).toString().replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -9,6 +10,7 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/EwwiiLogo.png" />
 		<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+		<link rel="canonical" href={Astro.canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Title and Description -->
