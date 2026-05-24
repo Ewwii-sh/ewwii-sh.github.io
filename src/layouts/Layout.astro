@@ -15,12 +15,16 @@ const canonicalURL = new URL(Astro.request.url, Astro.site).toString().replace(/
 
 		<!-- Title and Description -->
 		<title>Ewwii – Modern GTK Widget System for Linux Desktop Customization</title>
-		<meta name="description" content="Ewwii is a powerful, extensible GTK widget system and modern alternative to eww. Build beautiful, interactive widgets for Hyprland, Wayland, X11 and Linux desktop customization." />
+		<meta
+		    name="description"
+			content="Ewwii is a powerful, extensible GTK4 widget system and modern alternative to eww. It can be used to build beautiful, interactive widgets and status bars for Hyprland, Wayland, X11."
+		/>
 
 		<!-- Open Graph -->
 		<meta property="og:title" content="Ewwii: A Widget System, better, powerful and extensible" />
-		<meta property="og:description" content="The official website of ewwii, a GTK widget system for building interactive GUI components with flexibility and extensibility." />
+		<meta property="og:description" content="The official website of ewwii, a GTK4 widget system for building interactive GUI components with flexibility and extensibility." />
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Ewwii" />
 		<meta property="og:url" content="https://ewwii-sh.github.io" />
 		<meta property="og:image" content="https://ewwii-sh.github.io/EwwiiLogo.png" />
 
@@ -33,6 +37,9 @@ const canonicalURL = new URL(Astro.request.url, Astro.site).toString().replace(/
           "name": "Ewwii",
           "description": "Modern extensible GTK widget system for Linux desktop customization",
           "url": "https://ewwii-sh.github.io",
+          "sameAs": [
+            "https://github.com/Ewwii-sh/ewwii"
+          ],
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Linux",
           "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
