@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://ewwii-sh.github.io",
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
