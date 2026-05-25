@@ -113,6 +113,37 @@ body {
   animation: underline-grow 1s ease forwards;
 }
 
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-x,
+  .animate-gradient-bg,
+  .section-dark .bg-animated {
+    animation: none;
+  }
+  .hero-title .underline {
+    animation: none;
+    width: 100%;
+  }
+  .card,
+  .btn,
+  .logo-container {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .animate-gradient-x {
+    animation: none;
+    background-position: 0% 50%;
+  }
+  .card h3::after {
+    transition: none;
+  }
+  .card:hover h3::after {
+    width: 100%;
+  }
+}
+
 /* Hover scaling utility */
 .hover-scale {
   transition: transform 0.5s ease;
@@ -148,15 +179,16 @@ body {
   content: "";
   display: block;
   height: 3px;
-  width: 0;
+  width: 100%;
+  opacity: 0;
   background: var(--gradient-underline);
-  transition: width 0.5s ease;
+  transition: opacity 0.5s ease;
   border-radius: 2px;
   margin-top: 4px;
 }
 
 .card:hover h3::after {
-  width: 100%;
+    opacity: 100;
 }
 
 .card p {
@@ -166,7 +198,7 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-6px) scale(1.03);
+  transform: translateY(-3px) scale(1);
   box-shadow: var(--shadow-card-hover);
 }
 
