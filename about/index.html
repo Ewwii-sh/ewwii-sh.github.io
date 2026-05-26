@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><meta name="keywords" content="eww alternative, eww linux, linux widget system, gtk widgets, hyprland widgets, linux ricing, desktop customization"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.BcU9btPT.css"></head> <body data-astro-cid-sckkx6r4>  <div class="prose prose-invert mx-auto px-4 py-8 prose-a:text-[#ff914c]"> <p><a href="/">&#x3C;&#x3C; Go Back</a></p>
+<h1 id="about-ewwii">About Ewwii</h1>
+<p>Ewwii is a lightweight, extensive, fully customizable GTK4 based widget system for building widgets, status bars, and more. It is a hard fork and a rewrite of <a href="https://github.com/elkowar/eww">eww</a>. One of the core focuses of ewwii is simplicity, ease of use, good error diagnostics, and extensibility.</p>
+<p><strong>Features of ewwii:</strong></p>
+<ul>
+<li>Simple configuration language</li>
+<li>Plugin system to extend core features</li>
+<li>Excellent error diagnostics</li>
+<li>Wayland and X11 support</li>
+<li>GPU acceleration</li>
+<li>Hot Reload</li>
+</ul>
+<h2 id="origin-of-the-name">Origin of the Name</h2>
+<p>The name “ewwii” stands for <strong>Elkowars Wacky Widgets Improved Interface</strong>. It got this name because ewwii started out as a simple fork of eww (“Elkowars Wacky Widgets”), which did nothing but swap out the configuration language. Which we referred to as “interface”.</p>
+<h2 id="is-ewwii-better-than-eww">Is ewwii better than eww?</h2>
+<p>Ewwii started as a fork of eww but has since grown into a full rewrite. Compared to eww, Ewwii adds a plugin system, GPU acceleration, improved error messages, and fully dynamic widget creation and destruction at runtime. All of which eww does not support.</p>
+<h2 id="how-to-get-started">How to get started?</h2>
+<p>Getting started with ewwii is fairly simple. We use a simple configuration language that is designed to be easy. See the <a href="https://ewwii-sh.github.io/docs/intro">documentation</a> to get started right away!</p> </div> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>
