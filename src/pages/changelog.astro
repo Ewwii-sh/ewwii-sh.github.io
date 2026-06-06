@@ -34,263 +34,263 @@ const versionSections = markdown
 
 ---
 <Layout>
-  <section class="flex flex-col md:flex-row min-h-screen text-[var(--text-color)] relative">
+    <section class="flex flex-col md:flex-row min-h-screen text-[var(--text-color)] relative">
 
-    <!-- Mobile top bar -->
-    <div class="md:hidden flex justify-between items-center p-4 border-b border-gray-700">
-      <h2 class="text-xl font-bold">Versions</h2>
-      <button id="toggleSidebar" class="px-2 py-1 btn rounded" aria-expanded="false">☰</button>
-    </div>
+        <!-- Mobile top bar -->
+        <div class="md:hidden flex justify-between items-center p-4 border-b border-gray-700">
+            <h2 class="text-xl font-bold">Versions</h2>
+            <button id="toggleSidebar" class="px-2 py-1 btn rounded" aria-expanded="false">☰</button>
+        </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden md:hidden"></div>
+        <!-- Sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden md:hidden"></div>
 
-    <aside id="sidebar" class="fixed left-0 top-0 w-64 h-full z-50 transform -translate-x-full transition-transform duration-300 md:relative md:translate-x-0 md:w-1/4 md:block">
-      <h2 class="text-2xl font-bold p-4 w-full break-words">Versions</h2>
-      <ul class="flex flex-col gap-2">
-        {versionSections.map((v, i) => (
-          <li>
-            <button
-              class="w-full text-left px-3 py-2 rounded transition version-btn"
-              data-index={i}
-            >
-              {v!.version}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </aside>
+        <aside id="sidebar" class="fixed left-0 top-0 w-64 h-full z-50 transform -translate-x-full transition-transform duration-300 md:relative md:translate-x-0 md:w-1/4 md:block flex flex-col">
+            <h2 class="text-2xl font-bold p-4 w-full break-words">Versions</h2>
+            <ul class="flex flex-col gap-2 flex-1 overflow-y-auto h-screen" id="sidebar-item">
+                {versionSections.map((v, i) => (
+                <li>
+                    <button
+                        class="w-full text-left px-3 py-2 rounded transition version-btn"
+                        data-index={i}
+                        >
+                        {v!.version}
+                    </button>
+                </li>
+                ))}
+            </ul>
+        </aside>
 
-    <!-- Resizer for desktop -->
-    <div id="resizer" class="hidden md:block w-2 cursor-col-resize bg-gray-700"></div>
+        <!-- Resizer for desktop -->
+        <div id="resizer" class="hidden md:block w-1 cursor-col-resize bg-[#2a2a2d]"></div>
 
-    <!-- Main content -->
-    <main id="content" class="flex-1 p-6 overflow-y-auto space-y-8">
-      <a href="/" class="inline-block mb-4 px-4 py-2 bg-[#ff914c] text-[#121111] rounded hover:bg-[#e6853f] transition">
-        &laquo; Return Home
-      </a>
+        <!-- Main content -->
+        <main id="content" class="flex-1 p-6 overflow-y-auto space-y-8">
+            <a href="/" class="inline-block mb-4 px-4 py-2 bg-[#ff914c] text-[#121111] rounded hover:bg-[#e6853f] transition">
+                &laquo; Return Home
+            </a>
 
-      {versionSections.map((v, i) => (
-        <div
-          id={`version-${i}`}
-          class={`version-content ${i === 0 ? '' : 'hidden'}`}
-          set:html={v!.html}
-        />
-      ))}
-    </main>
-  </section>
+            {versionSections.map((v, i) => (
+            <div
+                id={`version-${i}`}
+                class={`version-content ${i === 0 ? '' : 'hidden'}`}
+                set:html={v!.html}
+                />
+                ))}
+        </main>
+    </section>
 
-  <!-- Scripts -->
-  <script>
-    // Version switching
-    const buttons = document.querySelectorAll('.version-btn');
-    const panels = document.querySelectorAll('.version-content');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const element = btn as HTMLElement;
-        const index = element.dataset.index;
-        panels.forEach(p => p.classList.add('hidden'));
-        document.getElementById('version-' + index)?.classList.remove('hidden');
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-    if (buttons.length > 0) buttons[0].classList.add('active');
+    <!-- Scripts -->
+    <script>
+        // Version switching
+        const buttons = document.querySelectorAll('.version-btn');
+        const panels = document.querySelectorAll('.version-content');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const element = btn as HTMLElement;
+                const index = element.dataset.index;
+                panels.forEach(p => p.classList.add('hidden'));
+                document.getElementById('version-' + index)?.classList.remove('hidden');
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+        if (buttons.length > 0) buttons[0].classList.add('active');
 
-    // Sidebar toggle (mobile)
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    const toggleBtn = document.getElementById('toggleSidebar');
-    function openSidebar() {
-      sidebar!.classList.remove('-translate-x-full');
-      overlay!.classList.remove('hidden');
-      toggleBtn!.setAttribute('aria-expanded', 'true');
-    }
+        // Sidebar toggle (mobile)
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const toggleBtn = document.getElementById('toggleSidebar');
+        function openSidebar() {
+            sidebar!.classList.remove('-translate-x-full');
+            overlay!.classList.remove('hidden');
+            toggleBtn!.setAttribute('aria-expanded', 'true');
+        }
 
-    function closeSidebar() {
-      sidebar!.classList.add('-translate-x-full');
-      overlay!.classList.add('hidden');
-      toggleBtn!.setAttribute('aria-expanded', 'false');
-    }
+        function closeSidebar() {
+            sidebar!.classList.add('-translate-x-full');
+            overlay!.classList.add('hidden');
+            toggleBtn!.setAttribute('aria-expanded', 'false');
+        }
 
-    toggleBtn?.addEventListener('click', () => {
-      if (sidebar!.classList.contains('-translate-x-full')) {
-        openSidebar();
-      } else {
-        closeSidebar();
-      }
-    });
+        toggleBtn?.addEventListener('click', () => {
+            if (sidebar!.classList.contains('-translate-x-full')) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        });
 
-    overlay?.addEventListener('click', closeSidebar);
+        overlay?.addEventListener('click', closeSidebar);
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (window.innerWidth < 768) closeSidebar();
-      });
-    });
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.innerWidth < 768) closeSidebar();
+            });
+        });
 
 
-    // Draggable resizer (desktop only)
-    const resizer = document.getElementById('resizer');
-    resizer?.addEventListener('mousedown', (_) => {
-      if (window.innerWidth < 768) return; // ignore on mobile
-      document.body.style.userSelect = 'none';
-      document.addEventListener('mousemove', doDrag);
-      document.addEventListener('mouseup', stopDrag);
-    });
+        // Draggable resizer (desktop only)
+        const resizer = document.getElementById('resizer');
+        resizer?.addEventListener('mousedown', (_) => {
+            if (window.innerWidth < 768) return; // ignore on mobile
+            document.body.style.userSelect = 'none';
+            document.addEventListener('mousemove', doDrag);
+            document.addEventListener('mouseup', stopDrag);
+        });
 
-    function doDrag(e: any) {
-      const newWidth = e.clientX;
-      if (newWidth > 100 && newWidth < window.innerWidth - 100) {
-        sidebar!.style.width = newWidth + 'px';
-      }
-    }
+        function doDrag(e: any) {
+            const newWidth = e.clientX;
+            if (newWidth > 100 && newWidth < window.innerWidth - 100) {
+                sidebar!.style.width = newWidth + 'px';
+            }
+        }
 
-    function stopDrag() {
-      document.removeEventListener('mousemove', doDrag);
-      document.removeEventListener('mouseup', stopDrag);
-      document.body.style.userSelect = '';
-    }
-  </script>
+        function stopDrag() {
+            document.removeEventListener('mousemove', doDrag);
+            document.removeEventListener('mouseup', stopDrag);
+            document.body.style.userSelect = '';
+        }
+    </script>
 
-  <Footer />
+    <Footer />
 </Layout>
 
 <style is:global>
-.version-btn:hover {
-  background-color: color-mix(in srgb, var(--bg-color) 70%, var(--text-color) 30%);
-}
+    .version-btn:hover {
+        background-color: color-mix(in srgb, var(--bg-color) 70%, var(--text-color) 30%);
+    }
 
-.version-btn.active {
-  background-color: #ff914c;
-  color: var(--bg-color);
-}
+    .version-btn.active {
+        background-color: #ff914c;
+        color: var(--bg-color);
+    }
 
-.version-btn.active:hover {
-  background-color: #ffb380;
-}
+    .version-btn.active:hover {
+        background-color: #ffb380;
+    }
 
-@media (max-width: 767px) {
-  #sidebar {
-    position: absolute;
-    z-index: 50;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: var(--bg-color);
-    transition: transform 0.3s ease;
-    transform: translateX(-100%);
-  }
-  #sidebar:not(.hidden) {
-    transform: translateX(0);
-  }
-}
+    @media (max-width: 767px) {
+        #sidebar {
+            position: absolute;
+            z-index: 50;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: var(--bg-color);
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+        #sidebar:not(.hidden) {
+            transform: translateX(0);
+        }
+    }
 
-.version-content {
-  transition: all 0.3s ease;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text-color);
-  line-height: 1.6;
-}
+    .version-content {
+        transition: all 0.3s ease;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
 
-/* Headings */
-.version-content h1 { font-size: 2.5rem; font-weight: bold; margin: 1.5rem 0 1rem; }
-.version-content h2 { font-size: 2rem; font-weight: bold; margin: 1.5rem 0 1rem; }
-.version-content h3 { font-size: 1.75rem; font-weight: bold; margin: 1.25rem 0 0.75rem; }
-.version-content h4 { font-size: 1.5rem; font-weight: bold; margin: 1.1rem 0 0.6rem; }
-.version-content h5 { font-size: 1.25rem; font-weight: bold; margin: 1rem 0 0.5rem; }
-.version-content h6 { font-size: 1rem; font-weight: bold; margin: 0.75rem 0 0.25rem; }
+    /* Headings */
+    .version-content h1 { font-size: 2.5rem; font-weight: bold; margin: 1.5rem 0 1rem; }
+    .version-content h2 { font-size: 2rem; font-weight: bold; margin: 1.5rem 0 1rem; }
+    .version-content h3 { font-size: 1.75rem; font-weight: bold; margin: 1.25rem 0 0.75rem; }
+    .version-content h4 { font-size: 1.5rem; font-weight: bold; margin: 1.1rem 0 0.6rem; }
+    .version-content h5 { font-size: 1.25rem; font-weight: bold; margin: 1rem 0 0.5rem; }
+    .version-content h6 { font-size: 1rem; font-weight: bold; margin: 0.75rem 0 0.25rem; }
 
-/* Paragraphs */
-.version-content p { margin: 0.75rem 0; }
+    /* Paragraphs */
+    .version-content p { margin: 0.75rem 0; }
 
-/* Lists */
-.version-content ul,
-.version-content ol { margin: 0.75rem 0 0.75rem 1.5rem; padding: 0; }
-.version-content li { margin: 0.25rem 0; }
+    /* Lists */
+    .version-content ul,
+    .version-content ol { margin: 0.75rem 0 0.75rem 1.5rem; padding: 0; }
+    .version-content li { margin: 0.25rem 0; }
 
-/* Blockquotes */
-.version-content blockquote {
-  border-left: 4px solid #ff914c;
-  padding-left: 1rem;
-  color: #d0d0d0;
-  font-style: italic;
-  margin: 1rem 0;
-  background-color: var(--bg-color);
-  filter: brightness(80%);
-  border-radius: 0.25rem;
-}
+    /* Blockquotes */
+    .version-content blockquote {
+        border-left: 4px solid #ff914c;
+        padding-left: 1rem;
+        color: #d0d0d0;
+        font-style: italic;
+        margin: 1rem 0;
+        background-color: var(--bg-color);
+        filter: brightness(80%);
+        border-radius: 0.25rem;
+    }
 
-/* Code & Preformatted */
-.version-content pre {
-  background-color: var(--bg-color);
-  filter: brightness(80%);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  font-size: 0.9rem;
-}
-.version-content code {
-  background-color: var(--bg-color);
-  filter: brightness(60%);
-  padding: 0.1rem 0.3rem;
-  border-radius: 0.25rem;
-  font-family: "Fira Code", monospace;
-}
+    /* Code & Preformatted */
+    .version-content pre {
+        background-color: var(--bg-color);
+        filter: brightness(80%);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        font-size: 0.9rem;
+    }
+    .version-content code {
+        background-color: var(--bg-color);
+        filter: brightness(60%);
+        padding: 0.1rem 0.3rem;
+        border-radius: 0.25rem;
+        font-family: "Fira Code", monospace;
+    }
 
-/* Tables */
-.version-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-}
-.version-content th,
-.version-content td {
-  border: 1px solid #444;
-  padding: 0.5rem 1rem;
-  text-align: left;
-}
-.version-content th {
-  background-color: #2a2b2d;
-}
-.version-content tr:nth-child(even) td {
-  background-color: #1e1f21;
-}
+    /* Tables */
+    .version-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+    }
+    .version-content th,
+    .version-content td {
+        border: 1px solid #444;
+        padding: 0.5rem 1rem;
+        text-align: left;
+    }
+    .version-content th {
+        background-color: #2a2b2d;
+    }
+    .version-content tr:nth-child(even) td {
+        background-color: #1e1f21;
+    }
 
-/* Links */
-.version-content a {
-  color: #ff914c;
-  text-decoration: underline;
-}
-.version-content a:hover {
-  text-decoration: none;
-}
+    /* Links */
+    .version-content a {
+        color: #ff914c;
+        text-decoration: underline;
+    }
+    .version-content a:hover {
+        text-decoration: none;
+    }
 
-/* Horizontal rules */
-.version-content hr {
-  border: none;
-  border-top: 1px solid #444;
-  margin: 2rem 0;
-}
+    /* Horizontal rules */
+    .version-content hr {
+        border: none;
+        border-top: 1px solid #444;
+        margin: 2rem 0;
+    }
 
-/* Images */
-.version-content img {
-  max-width: 100%;
-  border-radius: 0.5rem;
-  margin: 1rem 0;
-}
+    /* Images */
+    .version-content img {
+        max-width: 100%;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+    }
 
-/* Inline elements */
-.version-content strong { font-weight: bold; }
-.version-content em { font-style: italic; }
-.version-content del { text-decoration: line-through; }
+    /* Inline elements */
+    .version-content strong { font-weight: bold; }
+    .version-content em { font-style: italic; }
+    .version-content del { text-decoration: line-through; }
 
-/* Lists inside lists */
-.version-content ul ul,
-.version-content ol ol,
-.version-content ul ol,
-.version-content ol ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+    /* Lists inside lists */
+    .version-content ul ul,
+    .version-content ol ol,
+    .version-content ul ol,
+    .version-content ol ul {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 </style>

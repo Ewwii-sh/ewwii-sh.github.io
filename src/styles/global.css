@@ -273,9 +273,6 @@ body {
   margin-bottom: 1.5rem;
   transition: transform 0.5s ease;
 }
-.logo-container:hover {
-  transform: scale(1.05);
-}
 
 .hero-title {
   font-size: 1.25rem;
