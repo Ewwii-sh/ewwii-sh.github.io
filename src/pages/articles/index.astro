@@ -45,13 +45,11 @@ const searchIndex = sortedArticles.map(article => ({
                       })}
                     </time>
 
-                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors">
+                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors line-clamp-2">
                       {article.data.title}
                     </h3>
-                    <p class="text-sm line-clamp-3 text-[var(--text-gray)]">
-                        {article.data.description.length > 80 
-                          ? article.data.description.slice(0, 80) + '...' 
-                          : article.data.description}
+                    <p class="text-sm line-clamp-3 text-[var(--text-gray)] line-clamp-2">
+                      {article.data.description}
                     </p>
                   </div>
 
