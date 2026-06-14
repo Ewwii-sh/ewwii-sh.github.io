@@ -49,7 +49,9 @@ const searchIndex = sortedArticles.map(article => ({
                       {article.data.title}
                     </h3>
                     <p class="text-sm line-clamp-3 text-[var(--text-gray)]">
-                      {article.data.description}
+                        {article.data.description.length > 80 
+                          ? article.data.description.slice(0, 80) + '...' 
+                          : article.data.description}
                     </p>
                   </div>
 
