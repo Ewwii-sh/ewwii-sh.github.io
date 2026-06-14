@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.CEABjtNK.css"></head> <body data-astro-cid-sckkx6r4>  <article class="max-w-4xl mx-auto px-6 py-12"> <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a> <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]"> <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+Published on October 4, 2025 </time> <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">Ewwii v0.3.0: Introduction of GTK4</h1> <p class="text-xl mb-4 text-[var(--text-gray)]">A full explanation of what changes have occoured.</p> </header> <div class="prose dark:prose-invert max-w-none"> <p>Ewwii v0.3.0 marks a new beginning where ewwii is faster, more performant, and more animatable. But everything comes with its own pros and cons. This article goes into detail on this release, on new issues, and on recommended things that you can do to mitigate these new issues.</p>
+<h2 id="release-overview">Release Overview</h2>
+<p>First of all, let’s get into the release. Not all the changes are listed here, but the important are.</p>
+<h2 id="new-features">New Features</h2>
+<h3 id="can_target-property"><code>can_target</code> property</h3>
+<p>A new property called <code>can_target</code> has been introduced to all widgets. This property which makes it unable to receive pointer / targetable events.</p>
+<h3 id="icon-widget"><code>icon</code> widget</h3>
+<p>A new widget which maintains 1:1 ratio no matter what. It is particularly useful when the user has to show icons that doesn’t automatically resize to fit the full container.</p>
+<h2 id="changed-features">Changed Features</h2>
+<h3 id="dynamic-updates">Dynamic updates</h3>
+<p>The dynamic runtime engine’s widget creation / removal logic has been tweaked to match the new GTK4 expectations. As a widget cannot be downcasted to a container, the type of the widget is now matched against a list of container widgets and the supposed function is executed.</p>
+<h3 id="window-positioning-logic">Window positioning logic</h3>
+<p>GTK4 removed the ability to move a window for cross-platform compatibilty but it is a kick to the guts in ewwii as it relies on these logic.</p>
+<p>No changes were needed for the wayland backend as the window positioning logic is handled by the wlr-layer-shell protocol. But X11 requires a message to the X11 server for it to position a window. Hence, the window positioning logic has moved to a function that manually sends a request to the X11 server.</p>
+<h3 id="eventbox-widget">EventBox widget</h3>
+<p>The eventbox widget has been fully rewritten to match GTK4 expectations. In GTK4, there is actually no eventbox widget as there are controllers which can be attached to any widget. However, adding an option to add controllers to every single widget will be hard to maintain and hence ewwii retains an eventbox widget that is just a box with controllers attached.</p>
+<h3 id="initialization-logic-of-windows">Initialization logic of windows</h3>
+<p>The intialization logic of windows changed from asking GTK to create the window and position it to an x, y coordinate to just asking GTK to create the window. This change is done as we are handling the positioning logic after the initialization of the windows.</p>
+<h2 id="removed-features">Removed Features</h2>
+<h3 id="css-class-on-the-windows">CSS class on the windows</h3>
+<p>Previously, ewwii attached the name of the window as the window’s and its root child’s css class. This has been done as GTK4 seems to be causing unexpected behaviour with applying CSS that changes layout on X11.</p>
+<p>Now only the root child inherits a css class that is the name of its parent window as it ensures compatibility across wayland and x11.</p>
+<p>This change doesn’t break anything as styling the root child works exactly as styling the root window.</p>
+<h3 id="icon_name-property-from-image-widget"><code>icon_name</code> property from <code>image</code> widget</h3>
+<p>The <code>icon_name</code> property has been removed from the <code>image</code> widget i nfavour of the <code>icon</code> widget. This property is accessable on the <code>icon</code> widget.</p>
+<h3 id="same_size-property-from-stack-widget"><code>same_size</code> property from stack widget</h3>
+<p>GTK4 removed the underlying API that is called by this property and ewwii had no option other than removing it. The <code>box</code> widget already allows doing the same thing and this widget can be used as a replacement.</p>
+<h3 id="icon_size-property-from-image-widget"><code>icon_size</code> property from image widget</h3>
+<p>GTK4 also removed the underlying API that this property relies on. CSS can be used instead of setting the size of the image widget instead.</p>
+<h3 id="centerbox-widget">Centerbox widget</h3>
+<p>The <code>centerbox</code> widget has also been removed as a part of the migration to GTK4 as a <code>box</code> can be used to implement the same functionality.</p>
+<h2 id="the-new-issues">The New Issues</h2>
+<p>Migrating a full GTK3 based application to GTK4 comes with a lot of issues and of course, Ewwii now has new problems.</p>
+<h3 id="resource-usage">Resource Usage</h3>
+<p>GTK4 is GPU accelerated and thus needs more resources to set up. Moreover, the rendering backends also use a lot of resources due to the new changes. In testings, RAM usage has been found to spike to around 200MB very easily on certain hardware.</p>
+<p>This is a massive trade off for the new performance and hot startup boosts ewwii previous had and posses a great challenge towards the lightweight nature of ewwii.</p>
+<h4 id="the-solution">The solution</h4>
+<p>Luckly, there is a solution to this problem. GTK4 allows switching the GSK backends. So, this means that we can use the old cario based backend (which now also benifits from GPU acceleration) to get a stable resource usage.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">GSK_RENDERER</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">cairo</span><span style="color:#B392F0"> ewwii</span><span style="color:#9ECBFF"> open</span><span style="color:#9ECBFF"> foo</span></span></code></pre>
+<p>This command can be used to set the rendering backend to cario and get a stable resource usage with reasonable RAM usage until ewwii moves to its own custom renderer which is planned to be developed in the near future.</p>
+<h3 id="x11-compatibility">X11 Compatibility</h3>
+<p>Another critical issue that may make ewwii unreliable on X11 in the future. GTK4 is built with wayland in mind and it is clearly reflected by the removal of X11 related functions.</p>
+<p>One of the major problems while porting ewwii to GTK4 was GTK4 didn’t have those convinient GTK3 features that send requests to the X11 server to perform actions like making a window sticky.</p>
+<p>However, ewwii aims to keep its compatible nature by manually implementing each one of those convinient features that GTK3 had. Most of the time of porting to GTK4 was spend on this as the window creation architecture had to be changed completely.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The migration to GTK4 is a major architectural change that breaks some compatibility with the previous versions. Even though this migration introduced increased resource usage, ewwii is actively being developed to be as light as possible without scarificing any of its features.</p> </div> </article> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>

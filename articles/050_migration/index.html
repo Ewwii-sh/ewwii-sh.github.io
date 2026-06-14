@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.CEABjtNK.css"></head> <body data-astro-cid-sckkx6r4>  <article class="max-w-4xl mx-auto px-6 py-12"> <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a> <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]"> <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+Published on April 19, 2026 </time> <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">Ewwii v0.5.0: Overview &amp; Migration guide</h1> <p class="text-xl mb-4 text-[var(--text-gray)]">A full explanation of what changes have occoured.</p> </header> <div class="prose dark:prose-invert max-w-none"> <p>Ewwii v0.5.0 is a yet another major <strong>overhaul</strong> of the core engine. This update simplifies the overall rendering engine by completely getting rid of reevaluation system. This brings a lot of performance to the table but at the cost of <strong>breaking compatibility</strong> with configuration written in previous releases.</p>
+<p>Why was this change necessary?</p>
+<p>Well, if you were to have a big configuration with a lot of updating widgets, then you will experience some latency before the widget updates. This is because the configuration is being reevaluated to generate the new AST.</p>
+<p>And simplifying the configuration system will greatly help out the upcoming 0.6.0 release (which will be kept a secret for now).</p>
+<h2 id="major-changes">Major Changes</h2>
+<p>The major changes in this release include:</p>
+<ul>
+<li>Removal of <code>localsignal</code> and <code>localbind</code></li>
+<li>Removing on the fly mutability/comparability of poll, listen globals.</li>
+<li>Changing how <code>update</code> command works.</li>
+<li>Making poll, listen globals globall accessable throughout the codebase.</li>
+</ul>
+<h2 id="migration-guide">Migration Guide</h2>
+<p>Although there are only a few breaking changes, migration can be quite hard if you don’t know what you are doing. This is why this article exists, of course.</p>
+<h3 id="using-global-variables">Using Global Variables</h3>
+<p>This release also changed how you use global variables. And don’t worry! Its more intuitive now.</p>
+<p>Previously, you had to do something like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// How it used to be done</span></span>
+<span class="line"><span style="color:#E1E4E8">fn </span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">(time) {</span></span>
+<span class="line"><span style="color:#B392F0">    label</span><span style="color:#E1E4E8">(#{ text: time })</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">tree</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#B392F0">    poll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"time"</span><span style="color:#E1E4E8">, #{ cmd: </span><span style="color:#9ECBFF">"date '+%H:%M'"</span><span style="color:#E1E4E8">, interval: </span><span style="color:#9ECBFF">"60s"</span><span style="color:#E1E4E8"> }),</span></span>
+<span class="line"><span style="color:#B392F0">    defwindow</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"example"</span><span style="color:#E1E4E8">, #{}, </span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">(time))</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<p>But now you can just do this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// How to do it now:</span></span>
+<span class="line"><span style="color:#E1E4E8">fn </span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">    label</span><span style="color:#E1E4E8">(#{ text: time })</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">tree</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#B392F0">    poll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"time"</span><span style="color:#E1E4E8">, #{ cmd: </span><span style="color:#9ECBFF">"date '+%H:%M'"</span><span style="color:#E1E4E8">, interval: </span><span style="color:#9ECBFF">"60s"</span><span style="color:#E1E4E8"> }),</span></span>
+<span class="line"><span style="color:#B392F0">    defwindow</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"example"</span><span style="color:#E1E4E8">, #{}, </span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<p><strong>No need to pass global variables around now. They are global! Just use it where ever you want!!</strong></p>
+<h3 id="mutating--comparing-global-variables">Mutating &#x26; Comparing Global Variables</h3>
+<p>This is a little <strong>complex</strong>. So bare with me here. Its a downside of the simplification.</p>
+<p>Previously, we could just do this to mutate or compare global variables:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// Say `time` is a global variable</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// comparing time</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> time </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "00:00"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Its midnight!"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Mutates time to "Its {time}"</span></span>
+<span class="line"><span style="color:#E1E4E8">time </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Its "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> time</span></span>
+<span class="line"><span style="color:#B392F0">print</span><span style="color:#E1E4E8">(time);</span></span></code></pre>
+<p>But now, global variables cannot just give out the value it contains at that moment because to do that, reevaluation is needed. So as an alternative, we use the <code>bound</code> function.</p>
+<p>Here is how we mutate/compare now using <code>bound</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// Say `time` is a global variable</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// comparing global variables</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> local_var </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "00:00"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">bound</span><span style="color:#E1E4E8">([time, local_var], </span><span style="color:#F97583">|</span><span style="color:#E1E4E8">vars</span><span style="color:#F97583">|</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // `vars` is an array containing values</span></span>
+<span class="line"><span style="color:#6A737D">    // of the global variables and local variables</span></span>
+<span class="line"><span style="color:#6A737D">    // that we passed in.</span></span>
+<span class="line"><span style="color:#E1E4E8">    let time </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> vars[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#E1E4E8">    let local_var </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> vars[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    if time </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> local_var {</span></span>
+<span class="line"><span style="color:#B392F0">        print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Its midnight"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // You can also compare like this:</span></span>
+<span class="line"><span style="color:#E1E4E8">    if time </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "00::00"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Its midnight (2)"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Mutating variables / interacting with it</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> mutated_value </span><span style="color:#F97583">=</span><span style="color:#B392F0"> bound</span><span style="color:#E1E4E8">([time], vars {</span></span>
+<span class="line"><span style="color:#E1E4E8">    let time </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> vars[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    return </span><span style="color:#9ECBFF">"Its "</span><span style="color:#E1E4E8"> + time</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#6A737D">// `mutated_value` can now be passed to a</span></span>
+<span class="line"><span style="color:#6A737D">// property directly. Like so:</span></span>
+<span class="line"><span style="color:#6A737D">// label(#{ text: mutated_value })</span></span></code></pre>
+<p>So basically, you can <strong>still</strong> interact or mutate global variables. But it has to be done within bound.</p>
+<h3 id="localsignals">Localsignals</h3>
+<p>Localsignal was meant to be a lightweight, local variants to poll and listen. But now that global variables are just as lightweight and easier to manage, localsignals are now obsolete.</p>
+<p>You should use poll/listen global variables directly instead of localsignals now.</p>
+<h3 id="calling-update-command">Calling Update Command</h3>
+<p>Previosly, <code>update</code> command’s main purpose was reloading the widgets and optionally injecting variables to rhai source code. But from now on, they have a singular purpose. That being to update values global variables.</p>
+<p>How it was used previosuly:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ewwii</span><span style="color:#9ECBFF"> update</span><span style="color:#79B8FF"> --inject</span><span style="color:#9ECBFF"> "VAR1=bar,VAR2=foo2"</span></span></code></pre>
+<p>How it is used now:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ewwii</span><span style="color:#9ECBFF"> update</span><span style="color:#9ECBFF"> VAR1="bar"</span><span style="color:#9ECBFF"> VAR2="foo2"</span></span></code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Despite breaking many of the previous architectural decisions and configuration, this release will be the foundation for the upcoming 0.6.0 release, which will be one of the biggest and most useful ewwii releases.</p> </div> </article> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>

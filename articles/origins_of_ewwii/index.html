@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.CEABjtNK.css"></head> <body data-astro-cid-sckkx6r4>  <article class="max-w-4xl mx-auto px-6 py-12"> <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a> <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]"> <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+Published on May 26, 2026 </time> <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">Origins of Ewwii</h1> <p class="text-xl mb-4 text-[var(--text-gray)]">Exploring early days of ewwii, why it was created, and early design choices.</p> </header> <div class="prose dark:prose-invert max-w-none"> <p>During mid July, 2025 I was deep into working on a desktop environment called <strong>Theom</strong>. It was a simple and lightweight desktop environment that I created as a contribution to <a href="https://axos-project.com">AxOS</a>. Theom’s architecture revolved around each component being its own independant software instead of most of the components being powered by a single tool.</p>
+<p>Almost all of the GUI based components (like the dashboard) used <a href="https://flutter.dev/">flutter</a> as the framework. With flutter, it is extremely easy to make good looking applications thanks to its focus on <a href="https://m3.material.io/blog/building-with-m3-expressive">M3E</a>. But, it had a downside—it was created for Android. On Linux, flutter has a noticeably slow on startup. Often showing a blank window for <em>~1-2</em> seconds before showing the contents. For a desktop environment with focus on lightweightness, this was unacceptable. I needed to find a new tool that I can use to build most of the core GUI applications like the dashboard and the settings.</p>
+<p>At that time, two of the status bars that Theom provided used <a href="https://polybar.github.io">polybar</a> and <a href="https://elkowar.github.io/eww">eww</a>. Since eww was a more flexible widget system, I decided to use it to build the dashboard. Unfortunately, I didn’t get the hang of yuck, the configuration language of eww. I spend days on the dashboard and I kept hitting the same problems:</p>
+<ol>
+<li>Yuck was hard to read as I’ve never used a lisp-like language before.</li>
+<li>It was hard to create complex and dynamic widgets with lots of moving pieces.</li>
+</ol>
+<p>And during my misery, I got the bold idea of forking eww and fixing the problems myself. But there were two problems:</p>
+<ol>
+<li>I don’t know rust.</li>
+<li>I’m not familiar with the codebase.</li>
+</ol>
+<p>After thinking for a while, I decided to go through with the idea to at least see how far I’ll go. And thus began my ultimate misery (you’ll see why).</p>
+<h2 id="journey-to-compilation">Journey to Compilation</h2>
+<p>I went into the codebase with nothing but the goal of replacing yuck with something else. Something else that I can understand. And so I removed two crates from the codebase: <code>yuck</code> and <code>simplexpr</code>. Little did I know, this unleashed final boss of Rust.</p>
+<p>I tried compiling the project to see how much work I need to put into it. And was immediately bombarded by <strong>350+ errors</strong>. I was flabbergasted seeing that and I immediately quit working on the project. But after debating to myself, I ended up on the conclusion that I need to continue working on it. I really needed eww without yuck because eww was a really lightweight widget system and a perfect match to my lightweight desktop environment. Surely I only needed to solve 350+ errors, right?</p>
+<p>And I began work. I pulled up the <a href="https://doc.rust-lang.org/stable/book/">Rust Book</a> and ChatGPT and solving each error one by one. It wasn’t the best experience, but the rust compiler was very helpful. It told me what to do when I was hit with simple errors.</p>
+<p>The errors were extremely annoying though. I remember myself getting mad at how deeply yuck is coupled into eww. What do you mean the Window Definition and Widget Definition is inside yuck and not eww? What do you mean the properties of a window are evaluated by something called “Simplexpr”. Why is yuck more than just a parser but a core component of eww? I was annoyed a lot, but I kept going.</p>
+<p>Slowly but surely, in a week, I got the number of errors down to like 30, I believe? And then I solved that one error. And the second wave of errors hit me. The error count which was just at 30 was now at 120+. I was mad and wanted to quit, but I just couldn’t because I already spend a week of my life on this project. And quitting was like accepting defeat.</p>
+<p>And then I slowly but surely got the number of errors down to like 8. You see where its going? <em>I solved that one error and was back at 120+ errors</em>. But again, like the previous I managed to get it to a very low number. With each compilation, I expected to be bombarded with a lot of errors again. But nothing happened. And in no time, I was one error away from freedom. One error away from actual <strong>feedback loop</strong>. I fixed the erorr and braced for the worst. But it compiled. The misery was over and the project actually worked. Sure, it was buggy but it could show a label (the only widget that ewwii supported at that time) without crashing.</p>
+<p>I was thrilled. I finally got what I wanted after two weeks of work. And the best part? This transformed me completely. I started appreciating rust and enjoyed programming in it. Everything since this point was a breeze. I iterated fast and added all the features I wanted.</p>
+<h2 id="design-choices">Design Choices</h2>
+<p>During the journey to the first compilation, I made many design choices—include the configuration language. At first, I didn’t even know rhai existed. Instead, I was planning to embed lua. But during that time, I believe I used a modern <code>rustc</code> version which the lua crate was not compatible with. It gave some weird errors and I just stopped trying to embed lua because at that time, I wanted nothing but to get this project over with.</p>
+<p>Then I found rhai, and it looked easier to embed than lua. And so I made up my mind to embed that and get it over with. I worked on the ideal configuration style that can be achieved for like two hours and came up with this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#B392F0">enter</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#6A737D">  // Add all defwindow inside enter. Enter is the root of the config.</span></span>
+<span class="line"><span style="color:#B392F0">  defwindow</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    "example"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    #{</span></span>
+<span class="line"><span style="color:#E1E4E8">      monitor: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      windowtype: </span><span style="color:#9ECBFF">"dock"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      stacking: </span><span style="color:#9ECBFF">"fg"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      wm_ignore: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      geometry: #{</span></span>
+<span class="line"><span style="color:#E1E4E8">        x: </span><span style="color:#9ECBFF">"0%"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        y: </span><span style="color:#9ECBFF">"2px"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        width: </span><span style="color:#9ECBFF">"90%"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        height: </span><span style="color:#9ECBFF">"30px"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        anchor: </span><span style="color:#9ECBFF">"top center"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">      exclusive: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      reserve: #{ distance: </span><span style="color:#9ECBFF">"40px"</span><span style="color:#E1E4E8">, side: </span><span style="color:#9ECBFF">"top"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#B392F0">    label</span><span style="color:#E1E4E8">(#{ text: </span><span style="color:#9ECBFF">"example content"</span><span style="color:#E1E4E8"> })</span></span>
+<span class="line"><span style="color:#E1E4E8">  ),</span></span>
+<span class="line"><span style="color:#E1E4E8">]);</span></span></code></pre>
+<p>Sure, it was not the prettiest, but it did the job, and also looked like the best configuration style I could achieve with rhai.</p>
+<p>And another design choice I made regarding rhai was including the dyanamic configuration evaluation feature, which in theory is great and allows dynamic widget creation/destruction, but hurts the performance very badly and is extremely hard to build correctly (I had to build a diffing system to save performance but they made things complicated and there is still a fundamental performance cost to this design).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Ewwii didn’t have the best start. And maybe that is a skill issue. But it surely did make me a programmer that I never was before. And honestly, this is, if not the most painful, yet rewarding thing I’ve ever done. And the only other thing that ever comes close to this experience was the migration to gtk4, which introduced <strong>200+ errors</strong> and was a toolkit which I was not faimilar with.</p>
+<p>Regarding the early design choices, I ain’t too pround of them because they weren’t the greatest and I had to change them later on and infact required a lot more effort to change because the eww codebase was once rewritten by a Rust newbie.</p>
+<p>Anyhow, ewwii is doing best that ever and I hope it can grow well and fast. Peace!</p> </div> </article> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>

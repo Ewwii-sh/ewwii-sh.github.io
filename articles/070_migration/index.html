@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.CEABjtNK.css"></head> <body data-astro-cid-sckkx6r4>  <article class="max-w-4xl mx-auto px-6 py-12"> <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a> <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]"> <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+Published on May 25, 2026 </time> <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">Ewwii v0.7.0: Migration guide to Nbcl and problems with Rhai</h1> <p class="text-xl mb-4 text-[var(--text-gray)]">Ewwii v0.7.0 makes nbcl the default configuration language. This simplifies the process of configuration and allows more flexible growth for the tool.</p> </header> <div class="prose dark:prose-invert max-w-none"> <h2 id="why-drop-rhai">Why drop Rhai?</h2>
+<p>Rhai has been serving as a fully functional configuration language of ewwii for more than a year now. During this time, it had grown a lot. I created features, libraries, transpilers, etc. focusing on rhai. So why drop it all of a sudden for a new language that has way less built-in features, you ask?</p>
+<p>To understand, lets go back to the initial days of ewwii. I had just started this project with one single goal—make eww easier. But rhai isn’t the type of language that exactly is “easy” for this purpose. It was built the way it is for scripting purposes. Never for making UI components. And trying to make the language behave like a configuration language simply increased the complexity.</p>
+<p>And on top of this, ewwii had to experience the constraints of rhai.</p>
+<ul>
+<li>It had terrible error reporting</li>
+<li>Module system was messy</li>
+<li>It had a verbose syntax</li>
+<li>Scope doesn’t propagate</li>
+</ul>
+<p>And even if we ignore all these issues, it was hard to make it work because there needed to be done a lot of preprocessing of the configuration done before passing it to rhai.</p>
+<p>To solve all these issues, under the hood, ewwii had to do manual string manipulation as preprocessing, custom module system implementation, and manual AST walking to extract all the information that we can find to then compare against a list of known situations for “kind of good” error reporting. And even after all these processing, the user experience barely gets better.</p>
+<p>Because of all these concerns, ewwii desperately needed a new configuration language. One that is actually built for configuration, has scripting support, and is kinda nice for UI declaration. There existed <strong>none</strong> in the rust ecosystem. And outside the rust ecosystem, you can find languages like HCL, Jsonnet, KCL, etc. But I managed to find flaws in them too. The closest I got to what I needed was HCL. But it lacked the extensive “scripting” that I needed.</p>
+<p>So I had to create my own, general purpose language named <a href="https://nbcl-lang.github.io/">NBCL</a> which is an abbreviation of Node-Based Configuration Language. I made sure to prioritize good error reporting, module resolver, speed, and most importantly, simplicity.</p>
+<h2 id="basics-of-nbcl">Basics of Nbcl</h2>
+<p>In Nbcl, the most basic thing is the configuration. Everything else lays above it. And you configure in a node-like system. You can read about the nodes in the nbcl documentation:</p>
+<p><a href="https://nbcl-lang.github.io/docs/language-guide/nodes.html">https://nbcl-lang.github.io/docs/language-guide/nodes.html</a></p>
+<p>Its only about a two minute read. And that is all that you need to know to start configuring in Nbcl! The scripting aspect of the language is purely optional to get started.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Now that you know how nodes work, you can start configuring in nbcl. There are three things to learn before you can confidently build widgets in ewwii.</p>
+<ol>
+<li>Window definition</li>
+<li>Poll/Listen variable difinition and usage</li>
+<li>Widget definition &#x26; properties</li>
+</ol>
+<h3 id="window-definition">Window Definition</h3>
+<p><a href="https://ewwii-sh.github.io/docs/config_and_syntax/getting_started">https://ewwii-sh.github.io/docs/config_and_syntax/getting_started</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Window "bar" {</span></span>
+<span class="line"><span>    geometry = {</span></span>
+<span class="line"><span>      width = "100px"</span></span>
+<span class="line"><span>      height = "30px"</span></span>
+<span class="line"><span>      anchor = "top center"</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    exclusive = true</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Label {</span></span>
+<span class="line"><span>      text = "Glorious example!"</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h3 id="polllisten-variables">Poll/Listen Variables</h3>
+<p><a href="https://ewwii-sh.github.io/docs/config_and_syntax/variables">https://ewwii-sh.github.io/docs/config_and_syntax/variables</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Window "bar" {</span></span>
+<span class="line"><span>  geometry = {</span></span>
+<span class="line"><span>    width = "100px"</span></span>
+<span class="line"><span>    height = "30px"</span></span>
+<span class="line"><span>    anchor = "top center"</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  exclusive = true</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Label {</span></span>
+<span class="line"><span>    text = global("time").mutate("Glorious time: {self}")</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Poll "time" {</span></span>
+<span class="line"><span>  cmd = "date '+%H:%M:%S'"</span></span>
+<span class="line"><span>  interval = "1s"</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h3 id="widget-definition--properties">Widget Definition &#x26; Properties</h3>
+<p><a href="https://ewwii-sh.github.io/docs/widgets/props">https://ewwii-sh.github.io/docs/widgets/props</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>component ShowWidgets () {</span></span>
+<span class="line"><span>  Box {</span></span>
+<span class="line"><span>    Button { label = "Click me!" }</span></span>
+<span class="line"><span>    Label { text = "Don't click that button" }</span></span>
+<span class="line"><span>    Eventbox {</span></span>
+<span class="line"><span>      onclick = "notify-send 'Why did you click me?'"</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    # More widgets can be added like so</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Window "bar" {</span></span>
+<span class="line"><span>  geometry = {</span></span>
+<span class="line"><span>    width = "100px"</span></span>
+<span class="line"><span>    height = "30px"</span></span>
+<span class="line"><span>    anchor = "top center"</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  exclusive = true</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  ShowWidgets {}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h2 id="regarding-libraries">Regarding Libraries</h2>
+<p>Nbcl is newly part of ewwii and lacks all the libraries that were custom built into rhai. Those libraries are yet to be ported to nbcl and this release doesn’t include them. If your configuration heavily relies on libraries like <code>std::command</code>, <code>api::linux</code>, etc. Then it would be better to continue using ewwii <code>v0.6.0</code> until <code>v0.8.0</code> releases as it will bundle all the missing features in nbcl.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The migration to nbcl helped in further simplifying the codebase. With this change, ewwii will have more room for growth as it is not limited by the constraints of a scripting language and will be able to give the users a more plesant configuration experience.</p> </div> </article> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>
