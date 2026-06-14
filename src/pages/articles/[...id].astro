@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import Footer from '../../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  
+  return articles.map(entry => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, description, date } = entry.data;
+
+// Compile markdown layout body text to standard HTML
+const { Content } = await render(entry);
+---
+
+<Layout>
+  <article class="max-w-4xl mx-auto px-6 py-12">
+    <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a>
+    
+    <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]">
+      <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+        Published on {date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+      </time>
+
+      <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">{title}</h1>
+      <p class="text-xl mb-4 text-[var(--text-gray)]">{description}</p>
+    </header>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+  </article>
+  
+  <Footer />
+</Layout>

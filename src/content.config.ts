@@ -17,4 +17,16 @@ const plugins = defineCollection({
   })
 });
 
-export const collections = { about, plugins };
+const articles = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z
+            .string()
+            .or(z.date())
+            .transform((val) => new Date(val)),
+    })
+});
+
+export const collections = { about, plugins, articles };
