@@ -36,10 +36,10 @@ const searchIndex = tools.map(tool => ({
                 <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
                   
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors">
+                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors line-clamp-2">
                       {tool.data.title}
                     </h3>
-                    <p class="text-sm line-clamp-3 text-[var(--text-gray)]">
+                    <p class="text-sm line-clamp-3 text-[var(--text-gray)] line-clamp-2">
                       {tool.data.description}
                     </p>
                   </div>
