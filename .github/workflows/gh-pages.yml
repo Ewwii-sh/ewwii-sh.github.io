@@ -45,7 +45,9 @@ jobs:
       - name: Clone Plugin Index
         run: git clone https://github.com/Ewwii-sh/plugin-index.git
       - name: Copy Plugins
-        run: cp ./plugin-index/* ./src/content/plugins/
+        run: |
+          mkdir -p ./src/content/plugins/
+          cp ./plugin-index/index/* ./src/content/plugins/
 
       # Build Astro site
       - name: Build site
