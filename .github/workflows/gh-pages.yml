@@ -41,6 +41,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Setup plugin list
+      - name: Clone Plugin Index
+        run: git clone https://github.com/Ewwii-sh/plugin-index.git
+      - name: Copy Plugins
+        run: cp ./plugin-index/* ./src/content/plugins/
+
       # Build Astro site
       - name: Build site
         run: pnpm run build

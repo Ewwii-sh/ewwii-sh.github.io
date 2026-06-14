@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import Footer from '../../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const tools = await getCollection('plugins');
+
+const searchIndex = tools.map(tool => ({
+  id: tool.id,
+  title: tool.data.title,
+  description: tool.data.description
+}));
+---
+
+<Layout>
+    <div class="max-w-6xl mx-auto text-center mb-8 pt-4">
+      <a href="/" class="text-[var(--btn-primary-bg)] hover:underline transition text-center">
+          ← Return Home (/)
+      </a>
+    </div>
+
+    <div class="max-w-md mx-auto mb-10">
+        <input 
+         type="text" 
+         id="plugin-search" 
+         placeholder="Search plugins..." 
+         class="w-full px-4 py-2 rounded-lg border border-[var(--card-border)] bg-[var(--bg-color)] text-[var(--text-color)] focus:outline-none focus:border-[var(--btn-primary-bg)]"
+         />
+    </div>
+
+    <section id="directory-section" data-index={JSON.stringify(searchIndex)} class="py-10 px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {tools.map(tool => (
+            <div id={`card-${tool.id}`} class="plugin-card-item">
+              <a href={`/plugins/${tool.id}/`} class="group block h-full">
+                <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
+                  
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors">
+                      {tool.data.title}
+                    </h3>
+                    <p class="text-sm line-clamp-3 text-[var(--text-gray)]">
+                      {tool.data.description}
+                    </p>
+                  </div>
+
+                  {tool.data.tags && tool.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-[var(--card-border)]">
+                      {tool.data.tags.map(tag => (
+                        <span class="px-2 py-0.5 text-[10px] font-medium rounded-full bg-[var(--text-gray-2)]/10 text-[var(--text-gray)] border border-[var(--text-gray-2)]/20">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+    </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  import Fuse from 'https://esm.sh/fuse.js@7.0.0';
+
+  const searchInput = document.getElementById('plugin-search') as HTMLInputElement;
+  const container = document.getElementById('directory-section');
+  const cards = document.querySelectorAll('.plugin-card-item') as NodeListOf<HTMLElement>;
+
+  if (searchInput && container) {
+    const listData = JSON.parse(container.dataset.index || '[]');
+
+    const fuse = new Fuse(listData, {
+      keys: ['title', 'description'],
+      threshold: 0.4,
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim();
+
+      if (query === '') {
+        cards.forEach(card => card.style.display = '');
+        return;
+      }
+
+      const searchResults = fuse.search(query);
+      const matchingIds = searchResults.map(result => result.item.id);
+
+      cards.forEach(card => {
+        const cardId = card.id.replace('card-', '');
+
+        if (matchingIds.includes(cardId)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+</script>
