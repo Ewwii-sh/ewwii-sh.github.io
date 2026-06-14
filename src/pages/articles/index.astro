@@ -34,7 +34,7 @@ const searchIndex = sortedArticles.map(article => ({
           {sortedArticles.map(article => (
             <div id={`card-${article.id}`} class="article-card-item">
               <a href={`/articles/${article.id}/`} class="group block h-full">
-                <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 group-hover:-translate-y-1">
+                <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
                   
                   <div class="flex-1">
                     <time class="block text-xs font-semibold uppercase tracking-wider text-[var(--text-gray-2)] mb-2">
