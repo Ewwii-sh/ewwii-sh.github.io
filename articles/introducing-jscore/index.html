@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/EwwiiLogo.png"><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"><link rel="canonical"><meta name="generator" content="Astro v5.13.7"><!-- Title and Description --><title>Ewwii: Modern GTK Widget System for Linux Desktop Customization</title><meta name="description" content="Ewwii is a GTK4-based widget system for building beautiful, interactive widgets and status bars in both X11 and Wayland based Window Managers and Desktop Environements."><!-- Open Graph --><meta property="og:title" content="Ewwii: Extensible Widget System for Linux."><meta property="og:description" content="A fully customizable widget system for building interactive widgets and status bars on X11 and Wayland."><meta property="og:type" content="website"><meta property="og:site_name" content="Ewwii"><meta property="og:url" content="https://ewwii-sh.github.io"><meta property="og:image" content="https://ewwii-sh.github.io/Cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Meta Tags --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:domain" content="ewwii-sh.github.io"><meta property="twitter:url" content="https://ewwii-sh.github.io"><meta property="twitter:title" content="Ewwii"><meta property="twitter:description" content="An extensive and customizable widget system for Linux based on GTK4."><meta name="robots" content="index, follow"><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ewwii","description":"Modern extensible GTK widget system for Linux desktop customization","url":"https://ewwii-sh.github.io","sameAs":["https://github.com/Ewwii-sh/ewwii"],"applicationCategory":"DeveloperApplication","operatingSystem":"Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><link rel="stylesheet" href="/_astro/about.DBqI3QVE.css"></head> <body data-astro-cid-sckkx6r4>  <article class="max-w-4xl mx-auto px-6 py-12"> <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a> <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]"> <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
+Published on June 24, 2026 </time> <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">Introducing Jscore</h1> <p class="text-xl mb-4 text-[var(--text-gray)]">Introducing Jscore, a JavaScript plugin for ewwii.</p> </header> <div class="prose dark:prose-invert max-w-none"> <blockquote>
+<p><a href="https://ewwii-sh.github.io/jscore.ewwii">https://ewwii-sh.github.io/jscore.ewwii</a></p>
+</blockquote>
+<p>I am excited to introduce Jscore, a plugin that adds JavaScript support to ewwii. Not just “JavaScript”, no its more than that.
+Jscore redefines the flow of data within ewwii and replaces it with a stronger, and flexible architecture where your configuration itself
+produces the data instead of relying on external scripts and polling/listening them. Alongside this, jscore also comes with a lot
+more features which this article will discuss.</p>
+<h2 id="after-render-system">After Render System</h2>
+<p>Starting with the biggest highlight of jscore, the after render system. This is what allows configs to be self contained
+within a jscore config without relying on external scripts.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> after_render</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">api</span><span style="color:#E1E4E8">) {}</span></span></code></pre>
+<p>The <code>after_render</code> function is called immedeately after ewwii renders the window and it is within this function you
+update the widgets. The <code>api</code> contains all the functions that you would need to mutate the state of an ewwii widget.</p>
+<p>Here is an example:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> after_render</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">api</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // suppose we have a widget with name 'cool-box'</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> widget</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> api.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cool-box"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    widget.</span><span style="color:#B392F0">set_property</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"orientation"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"h"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    widget.</span><span style="color:#B392F0">add_class</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"red"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    widget.</span><span style="color:#B392F0">add_classes</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"green"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"blue"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"orange"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    widget.</span><span style="color:#B392F0">remove_class</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"green"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    widget.</span><span style="color:#B392F0">remove_classes</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"red"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"blue"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"orange"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>You can use <code>async</code> in here too to update multile widgets at the same time. Or you can use the functions in <code>Tools.stream</code> like so:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> Tools </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "ewwii/tools"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> after_render</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">api</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> myLabel</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> api.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cool-text"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    Tools.stream.</span><span style="color:#B392F0">time</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">t</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`System ticked at: ${</span><span style="color:#E1E4E8">t</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">iso</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        myLabel.</span><span style="color:#B392F0">set_property</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"text"</span><span style="color:#E1E4E8">, t.string);</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="npm-compatibility">Npm Compatibility</h2>
+<p>Jscore is compatible with <code>npm</code>, <code>pnpm</code>, <code>yarn</code>, etc. Basically anything that outputs the modules inside the <code>node_modules</code> file.
+But there is a catch, the package you are trying to use should not rely on node exclusive features like <code>node:fs</code>.</p>
+<p>Jscore needs to load the module as a single file from a readable location. For this it uses esbuild to quickly bundle it on the fly.
+Jscore can do it automatically. Just make sure to append <code>esbuild:</code> to the name of your packages, otherwise it wont load.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> lodash </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'esbuild:lodash'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> arr</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(lodash.</span><span style="color:#B392F0">chunk</span><span style="color:#E1E4E8">(arr, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(lodash.</span><span style="color:#B392F0">sum</span><span style="color:#E1E4E8">(arr));</span></span></code></pre>
+<h2 id="imperative-nature">Imperative Nature</h2>
+<p>Jscore embraces the imperative nature and makes the configuration reolves around it. Instead of defining how the UI should look,
+you tell jscore how to show the UI.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> Widgets </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "ewwii/widgets"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> myLabel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Widgets.</span><span style="color:#B392F0">Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Hello, World!"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> myBox </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Widgets.</span><span style="color:#B392F0">Box</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">myBox.</span><span style="color:#B392F0">add_child</span><span style="color:#E1E4E8">(myLabel);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> myWindow </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Widgets.</span><span style="color:#B392F0">Window</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"my_window"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">myWindow.</span><span style="color:#B392F0">add_child</span><span style="color:#E1E4E8">(myBox);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Widgets.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(myWindow);</span></span></code></pre>
+<h2 id="built-in-features-and-tooling">Built-in Features and Tooling</h2>
+<p>Although jscore uses V8, a barebones JavaScript evaluator that lacks features like fetch, timers, etc. Jscore
+overcomes this limitation by implementing its own simple alternative to these features. This lets users tap into
+the familiar web JS style.</p>
+<h2 id="takeaway">Takeaway</h2>
+<p>Jscore is designed for people who need maximum power. Even if you prefer some other language, maybe give jscore a shot one day!
+Its completely opposite to how configuration normally takes place in eww/ewwii.</p> </div> </article> <section class="py-12 px-6 border-t border-gray-700"> <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6"> <!-- Links --> <a href="/docs/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Docs
+</a> <a href="/changelog/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Changelog
+</a> <a href="/articles/" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Articles
+</a> <a href="/plugins/" , class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Plugins
+</a> <a href="https://github.com/Ewwii-sh" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+GitHub
+</a> <a href="https://discord.gg/63bKPx3Wb6" class="text-[var(--text-gray)] hover:text-[#ff914c] transition font-medium">
+Discord
+</a> </div> <!-- Bottom Color Changer --> <div class="hero-desc mt-6 flex justify-center items-center gap-2" style="margin-bottom: 0;"> <select id="theme-dropdown" class="px-3 py-1 rounded-md border text-sm"> <option value="system">System</option> <option value="light">Light</option> <option value="dark">Dark</option> </select> </div> <!-- Bottom text --> <p class="mt-6 text-center text-gray-500 text-sm">
+&copy; 2026 Ewwii. All rights reserved.
+</p> </section> <script type="module">const n=document.documentElement;function d(t){n.setAttribute("data-theme",t),localStorage.setItem("theme",t)}const e=document.getElementById("theme-dropdown");e&&(e.value=n.getAttribute("data-theme")??"dark",e.addEventListener("change",()=>{d(e.value)}));</script>  <script>
+(function() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const theme = savedTheme || (prefersLight ? "light" : "dark");
+  html.setAttribute("data-theme", theme);
+
+  if (!savedTheme) {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+      html.setAttribute("data-theme", e.matches ? "light" : "dark");
+    });
+  }
+
+  window.setTheme = function(newTheme) {
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+})();
+</script> </body></html>
