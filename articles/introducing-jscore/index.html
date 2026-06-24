@@ -13,8 +13,7 @@ within a jscore config without relying on external scripts.</p>
 <p>The <code>after_render</code> function is called immedeately after ewwii renders the window and it is within this function you
 update the widgets. The <code>api</code> contains all the functions that you would need to mutate the state of an ewwii widget.</p>
 <p>Here is an example:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"></span>
-<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> after_render</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">api</span><span style="color:#E1E4E8">) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> after_render</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">api</span><span style="color:#E1E4E8">) {</span></span>
 <span class="line"><span style="color:#6A737D">    // suppose we have a widget with name 'cool-box'</span></span>
 <span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> widget</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> api.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cool-box"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"></span>
@@ -38,8 +37,8 @@ update the widgets. The <code>api</code> contains all the functions that you wou
 <span class="line"><span style="color:#E1E4E8">    });</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h2 id="npm-compatibility">Npm Compatibility</h2>
-<p>Jscore is compatible with <code>npm</code>, <code>pnpm</code>, <code>yarn</code>, etc. Basically anything that outputs the modules inside the <code>node_modules</code> file.
-But there is a catch, the package you are trying to use should not rely on node exclusive features like <code>node:fs</code>.</p>
+<p>Jscore is compatible with <code>npm</code>, <code>pnpm</code>, <code>yarn</code>, etc. Basically anything that outputs the modules inside the <code>node_modules</code> directory
+with the catch being that the package you are trying to use should not rely on node exclusive features like <code>node:fs</code>.</p>
 <p>Jscore needs to load the module as a single file from a readable location. For this it uses esbuild to quickly bundle it on the fly.
 Jscore can do it automatically. Just make sure to append <code>esbuild:</code> to the name of your packages, otherwise it wont load.</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> lodash </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'esbuild:lodash'</span><span style="color:#E1E4E8">;</span></span>
