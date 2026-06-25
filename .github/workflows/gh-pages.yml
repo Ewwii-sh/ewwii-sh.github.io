@@ -50,6 +50,15 @@ jobs:
           mkdir -p ./src/content/articles/
           cp ./article-index/index/* ./src/content/articles/
 
+      # Copy nbcl grammar 
+      - name: Copy Nbcl grammar
+        run: |
+          REPO="nbcl-lang/vscode-nbcl"
+          FILE="nbcl.tmLanguage.json"
+          RAW_URL="https://raw.githubusercontent.com/${REPO}/main/syntaxes/${FILE}"
+
+          curl -fsSL $RAW_URL > $FILE
+
       # Build Astro site
       - name: Build site
         run: pnpm run build
