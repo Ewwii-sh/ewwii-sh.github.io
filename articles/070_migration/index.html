@@ -26,61 +26,61 @@ Published on May 25, 2026 </time> <h1 class="text-4xl font-bold mb-2 text-[var(-
 </ol>
 <h3 id="window-definition">Window Definition</h3>
 <p><a href="https://ewwii-sh.github.io/docs/config_and_syntax/getting_started">https://ewwii-sh.github.io/docs/config_and_syntax/getting_started</a></p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Window "bar" {</span></span>
-<span class="line"><span>    geometry = {</span></span>
-<span class="line"><span>      width = "100px"</span></span>
-<span class="line"><span>      height = "30px"</span></span>
-<span class="line"><span>      anchor = "top center"</span></span>
-<span class="line"><span>    }</span></span>
-<span class="line"><span>    exclusive = true</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>    Label {</span></span>
-<span class="line"><span>      text = "Glorious example!"</span></span>
-<span class="line"><span>    }</span></span>
-<span class="line"><span>}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="nbcl"><code><span class="line"><span style="color:#85E89D">Window</span><span style="color:#9ECBFF"> "bar"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    geometry</span><span style="color:#E1E4E8"> = {</span></span>
+<span class="line"><span style="color:#79B8FF">      width</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"100px"</span></span>
+<span class="line"><span style="color:#79B8FF">      height</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"30px"</span></span>
+<span class="line"><span style="color:#79B8FF">      anchor</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"top center"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#79B8FF">    exclusive</span><span style="color:#E1E4E8"> = </span><span style="color:#79B8FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">    Label</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">      text</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"Glorious example!"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h3 id="polllisten-variables">Poll/Listen Variables</h3>
 <p><a href="https://ewwii-sh.github.io/docs/config_and_syntax/variables">https://ewwii-sh.github.io/docs/config_and_syntax/variables</a></p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Window "bar" {</span></span>
-<span class="line"><span>  geometry = {</span></span>
-<span class="line"><span>    width = "100px"</span></span>
-<span class="line"><span>    height = "30px"</span></span>
-<span class="line"><span>    anchor = "top center"</span></span>
-<span class="line"><span>  }</span></span>
-<span class="line"><span>  exclusive = true</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  Label {</span></span>
-<span class="line"><span>    text = global("time").mutate("Glorious time: {self}")</span></span>
-<span class="line"><span>  }</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Poll "time" {</span></span>
-<span class="line"><span>  cmd = "date '+%H:%M:%S'"</span></span>
-<span class="line"><span>  interval = "1s"</span></span>
-<span class="line"><span>}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="nbcl"><code><span class="line"><span style="color:#85E89D">Window</span><span style="color:#9ECBFF"> "bar"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  geometry</span><span style="color:#E1E4E8"> = {</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"100px"</span></span>
+<span class="line"><span style="color:#79B8FF">    height</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"30px"</span></span>
+<span class="line"><span style="color:#79B8FF">    anchor</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"top center"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#79B8FF">  exclusive</span><span style="color:#E1E4E8"> = </span><span style="color:#79B8FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">  Label</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    text</span><span style="color:#E1E4E8"> = </span><span style="color:#B392F0">global</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"time"</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">.</span><span style="color:#B392F0">mutate</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Glorious time: {self}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">Poll</span><span style="color:#9ECBFF"> "time"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  cmd</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"date '+%H:%M:%S'"</span></span>
+<span class="line"><span style="color:#79B8FF">  interval</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"1s"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h3 id="widget-definition--properties">Widget Definition &#x26; Properties</h3>
 <p><a href="https://ewwii-sh.github.io/docs/widgets/props">https://ewwii-sh.github.io/docs/widgets/props</a></p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>component ShowWidgets () {</span></span>
-<span class="line"><span>  Box {</span></span>
-<span class="line"><span>    Button { label = "Click me!" }</span></span>
-<span class="line"><span>    Label { text = "Don't click that button" }</span></span>
-<span class="line"><span>    Eventbox {</span></span>
-<span class="line"><span>      onclick = "notify-send 'Why did you click me?'"</span></span>
-<span class="line"><span>    }</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>    # More widgets can be added like so</span></span>
-<span class="line"><span>  }</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Window "bar" {</span></span>
-<span class="line"><span>  geometry = {</span></span>
-<span class="line"><span>    width = "100px"</span></span>
-<span class="line"><span>    height = "30px"</span></span>
-<span class="line"><span>    anchor = "top center"</span></span>
-<span class="line"><span>  }</span></span>
-<span class="line"><span>  exclusive = true</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  ShowWidgets {}</span></span>
-<span class="line"><span>}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="nbcl"><code><span class="line"><span style="color:#F97583">component</span><span style="color:#85E89D"> ShowWidgets</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#85E89D">  Box</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#85E89D">    Button</span><span style="color:#E1E4E8"> { label = </span><span style="color:#9ECBFF">"Click me!"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#85E89D">    Label</span><span style="color:#E1E4E8"> { text = </span><span style="color:#9ECBFF">"Don't click that button"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#85E89D">    Eventbox</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">      onclick</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"notify-send 'Why did you click me?'"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    # More widgets can be added like so</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">Window</span><span style="color:#9ECBFF"> "bar"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  geometry</span><span style="color:#E1E4E8"> = {</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"100px"</span></span>
+<span class="line"><span style="color:#79B8FF">    height</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"30px"</span></span>
+<span class="line"><span style="color:#79B8FF">    anchor</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"top center"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#79B8FF">  exclusive</span><span style="color:#E1E4E8"> = </span><span style="color:#79B8FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">  ShowWidgets</span><span style="color:#E1E4E8"> {}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h2 id="regarding-libraries">Regarding Libraries</h2>
 <p>Nbcl is newly part of ewwii and lacks all the libraries that were custom built into rhai. Those libraries are yet to be ported to nbcl and this release doesn’t include them. If your configuration heavily relies on libraries like <code>std::command</code>, <code>api::linux</code>, etc. Then it would be better to continue using ewwii <code>v0.6.0</code> until <code>v0.8.0</code> releases as it will bundle all the missing features in nbcl.</p>
 <h2 id="conclusion">Conclusion</h2>
