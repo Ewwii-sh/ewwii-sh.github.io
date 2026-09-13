@@ -35,9 +35,6 @@ importers:
       prismjs:
         specifier: ^1.30.0
         version: 1.30.0
-      semver:
-        specifier: ^7.8.5
-        version: 7.8.5
       sharp:
         specifier: ^0.35.4
         version: 0.35.4(@types/node@24.3.3)
@@ -51,9 +48,6 @@ importers:
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
-      '@types/semver':
-        specifier: ^7.8.0
-        version: 7.8.0
       daisyui:
         specifier: ^5.7.37
         version: 5.7.37
@@ -896,9 +890,6 @@ packages:
 
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
-
-  '@types/semver@7.8.0':
-    resolution: {integrity: sha512-1mAINjtQCXXeLkJ9ehXkwOcBpqtLxiVtKhpUf83DdRNdQKV0iXZpaHYqRr7nj+wvxuJzoAmAwXI+sCNMv1CzLQ==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -2826,8 +2817,6 @@ snapshots:
   '@types/sax@1.2.7':
     dependencies:
       '@types/node': 17.0.45
-
-  '@types/semver@7.8.0': {}
 
   '@types/unist@3.0.3': {}
 

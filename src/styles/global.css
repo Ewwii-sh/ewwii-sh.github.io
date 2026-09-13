@@ -4,14 +4,15 @@
 
 @custom-variant dark (&:where(html:not([data-theme="light"]), html:not([data-theme="light"]) *));
 
+
 @plugin "daisyui/theme" {
   name: "dark";
   default: false;
   prefersdark: false;
   color-scheme: "dark";
-  --color-base-100: oklch(25.33% 0.016 252.42);
-  --color-base-200: oklch(23.26% 0.014 253.1);
-  --color-base-300: oklch(21.15% 0.012 254.09);
+  --color-base-100: #121212;
+  --color-base-200: #1b1b1d;
+  --color-base-300: #17171a;
   --color-base-content: oklch(97.807% 0.029 256.847);
   --color-primary: oklch(70% 0.213 47.604);
   --color-primary-content: oklch(26% 0.079 36.259);
@@ -38,6 +39,7 @@
   --depth: 1;
   --noise: 0;
 }
+
 
 @plugin "daisyui/theme" {
   name: "light";
