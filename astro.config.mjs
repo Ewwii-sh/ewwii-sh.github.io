@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
+import Icons from 'unplugin-icons/vite';
 import sitemap from "@astrojs/sitemap";
 
 import fs from 'node:fs'
@@ -28,6 +29,11 @@ export default defineConfig({
         }
     },
     vite: {
-        plugins: [tailwindcss()],
+        plugins: [
+            tailwindcss(),
+            Icons({
+                compiler: 'astro',
+            }),
+        ],
     },
 });

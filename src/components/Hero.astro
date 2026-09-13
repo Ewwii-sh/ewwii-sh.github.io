@@ -1,24 +1,35 @@
-<section class="section-dark">
-  <div class="bg-animated"></div>
+---
+import { Image } from 'astro:assets';
+---
 
-  <div class="logo-container">
-    <img src="/EwwiiLogo.png" width="82" height="82" alt="Ewwii Logo" class="drop-shadow-xl" />
-    <h1 class="text-7xl sm:text-8xl font-extrabold tracking-tight text-gradient animate-gradient-x">
-      Ewwii
-    </h1>
-  </div>
+<section class="w-full max-w-2xl mx-auto flex flex-col gap-5 px-4 pt-10 sm:pt-16 pb-8 text-center">
+    <div class="flex items-center justify-center gap-3">
+        <Image 
+        src="/EwwiiLogo.png" 
+        width={64}
+        height={64} 
+        alt="Ewwii Logo" 
+        class="w-10 h-10 sm:w-20 sm:h-20 object-contain" 
+        loading="eager" 
+        fetchpriority="high" 
+        />
+        <h1 class="text-6xl sm:text-7xl font-extrabold tracking-tight text-base-content">
+            Eww<span class="text-primary">ii</span>
+        </h1>
+    </div>
 
-  <h2 class="hero-title">
-    “Building Widgets Made Better”
-    <span class="underline"></span>
-  </h2>
+    <p class="text-base sm:text-lg text-base-content/70 leading-relaxed max-w-lg mx-auto">
+    Ewwii is a lightweight, extensible, and easy-to-use widget system for building interactive widgets, status bars, and more on both Wayland and X11 quickly.
+    </p>
 
-  <p class="hero-desc">
-    Ewwii is a lightweight, extensible, and easy to use widget system for building interactive widgets, status bars, and more on both Wayland and X11 quickly.
-  </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
+        <a href="/docs/" class="btn btn-primary w-full sm:w-auto">Get Started</a>
+        <a href="https://github.com/Ewwii-sh" class="btn btn-outline w-full sm:w-auto">View on GitHub</a>
+    </div>
 
-  <div class="hero-cta">
-    <a href="/docs/" class="btn btn-primary">Get Started</a>
-    <a href="https://github.com/Ewwii-sh" class="btn btn-outline">View on GitHub</a>
-  </div>
+    <div class="mockup-code w-full text-start">
+        <pre data-prefix="$"><code># Quick install</code></pre>
+        <pre data-prefix="$"><code>sh -c "$(curl -fsSL https://ewwii-sh.github.io/install.sh)"</code></pre>
+    </div>
 </section>
+

@@ -57,8 +57,8 @@ curl -sL "$EWWII_DOWNLOAD_URL/$BIN_NAME" -o "$BIN_NAME"
 echo "${BLUE}Granting $BIN_NAME executable permission...${RESET}"
 chmod +x "$BIN_NAME"
 
-echo "${BLUE}Installing $BIN_NAME to /usr/local/bin (requires sudo)...${RESET}"
-sudo mv "$BIN_NAME" /usr/local/bin/
+echo "${BLUE}Installing $BIN_NAME to '$HOME/.local/bin/ewwii'${RESET}"
+mv "$BIN_NAME" "$HOME/.local/bin/ewwii"
 
 # --- Finish ---
 echo ""

@@ -1,33 +1,57 @@
 ---
 import Card from './Card.astro';
 import CodeBlock from './CodeBlock.astro';
+import Puzzle from '~icons/lucide/puzzle';
+import Zap from '~icons/lucide/zap';
+import Sliders from '~icons/lucide/sliders';
+import Wrench from '~icons/lucide/wrench';
+import Feather from '~icons/lucide/feather';
+import Monitor from '~icons/lucide/monitor';
 ---
-
-<section class="py-10 px-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-        <Card 
-         title="Extensive Plugin Support" 
-         description="Use plugins to extend/replace core components of ewwii including the configuration language." 
-         />
-        <Card 
-         title="Hot Reload" 
-         description="Instantly see changes during development without having to restart your app for fast iteration." 
-         />
-        <Card 
-         title="Simple Configuration" 
-         description="Use a simple yet fast configuration language with an easy and intuitive syntax for building your widgets."  
-        />
-        <Card 
-         title="Ecosystem Tooling" 
-         description="An ecosystem of tools focused on extending core functionality and providing the best user experience." 
-        />
-        <Card 
-         title="Feather Weight" 
-         description="Extremely lightweight on both memory and binary size with the only overhead being GTK4 framework itself." 
-        />
-        <Card 
-         title="X11 + Wayland compatibility" 
-         description="Seamlessly create widgets on both X11 and Wayland environments with ease." 
-        />
+<section class="w-full py-16 px-4 bg-base-100">
+  <div class="w-full max-w-6xl mx-auto">
+    
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
+        Built for Performance & Flexibility
+      </h2>
+      <p class="text-base-content/70 mt-2 max-w-xl mx-auto">
+        Everything you need to construct high-performance desktop widgets.
+      </p>
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Card 
+        icon={Puzzle}
+        title="Extensive Plugin Support" 
+        description="Use plugins to extend or replace core components of Ewwii, including the configuration language." 
+      />
+      <Card 
+        icon={Zap}
+        title="Hot Reload" 
+        description="Instantly see changes during development without having to restart your app for fast iteration." 
+      />
+      <Card 
+        icon={Sliders}
+        title="Simple Configuration" 
+        description="Use a simple yet fast configuration language with an intuitive syntax for building your widgets."  
+      />
+      <Card 
+        icon={Wrench}
+        title="Ecosystem Tooling" 
+        description="An ecosystem of tools focused on extending core functionality and providing the best user experience." 
+      />
+      <Card 
+        icon={Feather}
+        title="Feather Weight" 
+        description="Extremely lightweight on memory and binary size with the only overhead being the GTK4 framework itself." 
+      />
+      <Card 
+        icon={Monitor}
+        title="X11 + Wayland Compatibility" 
+        description="Seamlessly create widgets across both X11 and Wayland compositor environments with ease." 
+      />
+    </div>
+
+  </div>
 </section>

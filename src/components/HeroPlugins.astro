@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import CSSImage from '../assets/css.png';
+import JSImage from '../assets/js.png';
+import LImage from '../assets/limg.png';
+---
+
+<section class="w-full bg-base-100 mb-16">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
+        Extend Ewwii With Plugins!
+      </h2>
+      <p class="text-base-content/70 mt-2 max-w-xl mx-auto">
+        Use community plugins to extend the capabilities of ewwii.
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+        <ul class="list bg-base-300 rounded-box shadow-md max-w-xl">
+
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Featured Plugins</li>
+
+            <li class="list-row">
+                <div><Image class="size-10 rounded-box" alt="L Image" src={LImage} /></div>
+                <div class="list-col-grow">
+                    <div>Yucky Ewwii</div>
+                    <div class="text-xs uppercase font-semibold opacity-60">Language</div>
+                </div>
+                <p class="list-col-wrap text-xs">
+                Language plugin for bringing back the original 'yuck' configuration language from eww (elkowars wacky widgets)
+                for people who enjoy lispy syntax and for those who want to port their configuration.
+                </p>
+                <a class="btn btn-square btn-ghost" href="/plugins/yucky-ewwii/">
+                    <svg aria-label="Play" class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
+                </a>
+            </li>
+
+            <li class="list-row">
+                <div><Image class="size-10 rounded-box" alt="JavaScript Image" src={JSImage}/></div>
+                <div class="list-col-grow">
+                    <div>Jscore</div>
+                    <div class="text-xs uppercase font-semibold opacity-60">Language</div>
+                </div>
+                <p class="list-col-wrap text-xs">
+                A JavaScript language plugin with a unique way of managing data. It supports importing and using nodejs 
+                dependencies, which make it a powerful option for users already familiar with JavaScript.
+                </p>
+                <a class="btn btn-square btn-ghost" href="/plugins/jscore/">
+                    <svg aria-label="Play" class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
+                </a>
+            </li>
+
+            <li class="list-row">
+                <div><Image class="size-10 rounded-box" alt="CSS Image" src={CSSImage}/></div>
+                <div class="list-col-grow">
+                    <div>PreCSS</div>
+                    <div class="text-xs uppercase font-semibold opacity-60">Styling</div>
+                </div>
+                <p class="list-col-wrap text-xs">
+                A CSS plugin with predefined set of CSS classes ready to be used directly from ewwii. It works with the user-defined
+                colors and aims to save time by being convenient.
+                </p>
+                <a class="btn btn-square btn-ghost" href="/plugins/precss/">
+                    <svg aria-label="Play" class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+</section>
