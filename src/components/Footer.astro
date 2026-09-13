@@ -45,6 +45,7 @@
     function setTheme(theme: any) {
         html.setAttribute("data-theme", theme);
         localStorage.setItem("theme", theme);
+        localStorage.setItem("starlight-theme", theme);
     }
 
     const dropdown = document.getElementById("theme-dropdown") as HTMLSelectElement | null;
