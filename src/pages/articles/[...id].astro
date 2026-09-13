@@ -23,7 +23,7 @@ const { Content } = await render(entry);
   <article class="max-w-4xl mx-auto px-6 py-12">
     <a href="/articles/" class="text-[var(--btn-primary-bg)] hover:underline">← Back to Articles</a>
     
-    <header class="mt-6 mb-8 border-b border-[var(--card-border)] pb-6 text-[var(--text-color)]">
+    <header class="mt-6 mb-8 pb-6 border-b border-black/40 dark:border-white/40">
       <time class="block text-sm font-semibold tracking-wide text-[var(--text-gray-2)] mb-2">
         Published on {date.toLocaleDateString('en-US', {
           year: 'numeric',
@@ -33,7 +33,7 @@ const { Content } = await render(entry);
       </time>
 
       <h1 class="text-4xl font-bold mb-2 text-[var(--text-color)]">{title}</h1>
-      <p class="text-xl mb-4 text-[var(--text-gray)]">{description}</p>
+      <p class="text-xl mb-4 text-base-content/70">{description}</p>
     </header>
 
     <div class="prose dark:prose-invert max-w-none">

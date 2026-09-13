@@ -22,39 +22,48 @@ const searchIndex = sortedArticles.map(article => ({
 
     <div class="max-w-md mx-auto mb-10 px-4 md:px-0">
         <input 
-         type="text" 
-         id="article-search" 
-         placeholder="Search articles..." 
-         class="w-full px-4 py-2 rounded-lg border border-[var(--card-border)] bg-[var(--bg-color)] text-[var(--text-color)] focus:outline-none focus:border-[var(--btn-primary-bg)]"
-         />
+        type="text" 
+        id="article-search" 
+        placeholder="Search articles..." 
+        class="w-full px-4 py-2 rounded-lg border border-[var(--card-border)] bg-[var(--bg-color)] text-[var(--text-color)] focus:outline-none focus:border-[var(--btn-primary-bg)]"
+        />
     </div>
 
     <section id="articles-directory" data-index={JSON.stringify(searchIndex)} class="py-10 px-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {sortedArticles.map(article => (
+            {sortedArticles.map(article => (
             <div id={`card-${article.id}`} class="article-card-item">
-              <a href={`/articles/${article.id}/`} class="group block h-full">
-                <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
-                  
-                  <div class="flex-1">
-                    <time class="block text-xs font-semibold uppercase tracking-wider text-[var(--text-gray-2)] mb-2">
-                      {article.data.date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
+                <a href={`/articles/${article.id}/`} class="group block h-full focus:outline-none">
+                    <div class="card card-border bg-base-200 hover:bg-base-300/60 border border-base-300 shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-200 h-full">
+                        <div class="card-body p-6 flex flex-col justify-between">
 
-                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors line-clamp-2">
-                      {article.data.title}
-                    </h3>
-                    <p class="text-sm line-clamp-3 text-[var(--text-gray)] line-clamp-2">
-                      {article.data.description}
-                    </p>
-                  </div>
+                            <div>
+                                <time class="block text-xs font-semibold uppercase tracking-wider text-base-content/60 mb-2">
+                                    {article.data.date.toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                    })}
+                                </time>
 
-                </div>
-              </a>
+                                <h3 class="card-title text-xl font-bold text-base-content group-hover:text-primary transition-colors line-clamp-2">
+                                    {article.data.title}
+                                </h3>
+
+                                <p class="text-sm text-base-content/70 leading-relaxed mt-2 line-clamp-3">
+                                {article.data.description}
+                                </p>
+                            </div>
+
+                            <div class="card-actions justify-end mt-4 pt-2 border-t border-base-content/10">
+                                <span class="text-xs font-semibold text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                    Read article &rarr;
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
             </div>
           ))}
         </div>

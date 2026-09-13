@@ -32,30 +32,32 @@ const searchIndex = tools.map(tool => ({
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {tools.map(tool => (
             <div id={`card-${tool.id}`} class="plugin-card-item">
-              <a href={`/plugins/${tool.id}/`} class="group block h-full">
-                <div class="flex flex-col h-full p-6 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]">
-                  
-                  <div class="flex-1">
-                    <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] group-hover:text-[var(--btn-primary-bg)] transition-colors line-clamp-2">
-                      {tool.data.title}
-                    </h3>
-                    <p class="text-sm line-clamp-3 text-[var(--text-gray)] line-clamp-2">
-                      {tool.data.description}
-                    </p>
-                  </div>
+                <a href={`/plugins/${tool.id}/`} class="group block h-full">
+                    <div class="card h-full bg-base-200 border border-base-300 shadow-md hover:shadow-md transition-all duration-200 hover:border-base-300">
+                        <div class="card-body p-6 flex flex-col justify-between">
 
-                  {tool.data.tags && tool.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-[var(--card-border)]">
-                      {tool.data.tags.map(tag => (
-                        <span class="px-2 py-0.5 text-[10px] font-medium rounded-full bg-[var(--text-gray-2)]/10 text-[var(--text-gray)] border border-[var(--text-gray-2)]/20">
-                          {tag}
-                        </span>
-                      ))}
+                            <div class="flex-1">
+                                <h3 class="card-title text-xl font-bold mb-2 text-base-content group-hover:text-primary transition-colors line-clamp-2">
+                                    {tool.data.title}
+                                </h3>
+                                <p class="text-sm text-base-content/70 line-clamp-2">
+                                {tool.data.description}
+                                </p>
+                            </div>
+
+                            {tool.data.tags && tool.data.tags.length > 0 && (
+                            <div class="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-base-200">
+                                {tool.data.tags.map(tag => (
+                                <span class="badge badge-ghost badge-xs font-medium">
+                                    {tag}
+                                </span>
+                                ))}
+                            </div>
+                            )}
+
+                        </div>
                     </div>
-                  )}
-
-                </div>
-              </a>
+                </a>
             </div>
           ))}
         </div>
