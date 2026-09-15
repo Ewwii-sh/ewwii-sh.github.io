@@ -33,7 +33,7 @@ const searchIndex = tools.map(tool => ({
           {tools.map(tool => (
             <div id={`card-${tool.id}`} class="plugin-card-item">
                 <a href={`/plugins/${tool.id}/`} class="group block h-full">
-                    <div class="card h-full bg-base-200 border border-base-300 shadow-md hover:shadow-md transition-all duration-200 hover:border-base-300">
+                    <div class="card card-border bg-base-200 hover:bg-base-300/60 border border-base-300 shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-200 h-full">
                         <div class="card-body p-6 flex flex-col justify-between">
 
                             <div class="flex-1">
